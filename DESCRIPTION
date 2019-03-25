@@ -1,0 +1,29 @@
+Package: bdp4R
+Type: Package
+Title: Big Data Preprocessing For R
+Version: 0.1.0
+Author: Miguel ferreiro díaz
+Maintainer: The package maintainer <miguel.ferreiro.diaz@gmail.com>
+Description: More about what it does (maybe more than one line)
+    Use four spaces when indenting paragraphs within the Description.
+License: MIT
+Encoding: UTF-8
+LazyData: true
+Imports: 
+        R6, stringi,
+        rlist, XML,
+        tools, devtools,
+        rjson, pipeR,
+		rtweet, streamR,
+        rlang, tuber,
+        magrittr, data.table,
+        readr, rJava,
+        cld2, tibble,
+        pipeR, purrr,
+        stringr, httr,
+        ini, devtools,
+        jwatjars, jwatr,
+        rex, backports,
+        R.lang, tokenizers,
+		urltools
+RoxygenNote: 6.1.1
