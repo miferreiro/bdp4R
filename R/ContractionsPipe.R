@@ -1,7 +1,7 @@
 #' @title Class to find and/or replace the contractions on the data of a instance
 #' @description This class allows you to preprocess the data of an instance to
 #' find the contractions that are in it. Optionally, you can decide whether to
-#' delete the data contractions or not.
+#' replace the data contractions or not.
 #' @docType class
 #' @usage ContractionsPipe$new(propertyName = "contractions",
 #'                      propertyLanguageName = "language",
@@ -52,7 +52,7 @@
 #' (Instance) Instance to preproccess.
 #' }
 #' \item{\strong{replaceContractions}}{
-#' (logical) Indicate if the contractions are replace or not.
+#' (logical) Indicates if the contractions are replace or not.
 #' }
 #' }
 #' }
@@ -73,10 +73,10 @@
 #' \item{\emph{Arguments}}{
 #' \itemize{
 #' \item{\strong{data}}{
-#' (character) Text to preproccess.
+#' (character) Text in which the contraction is searched.
 #' }
 #' \item{\strong{contraction}}{
-#' (character) Indicate the contraction to find.
+#' (character) Indicates the contraction to find.
 #' }
 #' }
 #' }
@@ -84,7 +84,7 @@
 #' }
 #'
 #' \item{\bold{replaceContraction}}{
-#' Function that replace the contraction in the data for the extendedContraction.
+#' Function that replaces the contraction in the data for the extendedContraction.
 #' \itemize{
 #' \item{\emph{Usage}}{
 #'
@@ -97,10 +97,10 @@
 #' \item{\emph{Arguments}}{
 #' \itemize{
 #' \item{\strong{contraction}}{
-#' (character) Indicate the contraction to remove.
+#' (character) Indicates the contraction to remove.
 #' }
 #' \item{\strong{extendedContraction}}{
-#' (character) Indicate the string to replace for the contraction found.
+#' (character) Indicates the string to replace for the contraction found.
 #' }
 #' \item{\strong{data}}{
 #' (character) Text in which contractions will be replaced.

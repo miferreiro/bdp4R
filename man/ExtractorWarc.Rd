@@ -12,8 +12,9 @@ ExtractorWarc$new(path)
 \item{path}{(character) Path of the warc-type file.}
 }
 \description{
-It is a class that inherits from the Instance class and implements
-the functions of extracting the text and the date of an warc-type file.
+It is a class that inherits from the \code{Instance} class and
+implements the functions of extracting the text and the date of an warc-type
+file.
 }
 \details{
 The read_warc function of the jwart package was overwritten because
@@ -32,8 +33,8 @@ This class inherits from \code{\link{Instance}} and implements the
 
 \itemize{
 \item{\bold{obtainDate}}{
-Function that obtain the date of the warc file. Find the warcinfo type records
-in which the date appears and standardize it with the format:
+Function that obtains the date of the warc file. Finds the warcinfo type records
+in which the date appearss and standardizes it with the format:
 "\%a \%b \%d \%H:\%M:\%S \%Z \%Y" (Example: "Thu May 02 06:52:36 UTC 2013").
 \itemize{
 \item{\emph{Usage}}{
@@ -44,7 +45,7 @@ in which the date appears and standardize it with the format:
 }
 
 \item{\bold{obtainSource}}{
-Function that obtain the source of the warc file. The list of records that
+Function that obtains the source of the warc file. The list of records that
 contain information are obtained, which they are resource and response. Then
 they are traversed and the charset of that record is obtained. If that charset
 matches the one obtained from guess_encoding, payload_content is used to get

@@ -15,8 +15,9 @@ ExtractorSms$new(path, pathKeys = "config/configurations.ini")
 configurations to read the eml files.}
 }
 \description{
-It is a class that inherits from the Instance class and implements
-the functions of extracting the text and the date of an eml-type file.
+It is a class that inherits from the \code{Instance} class and
+implements the functions of extracting the text and the date of an eml-type
+file.
 }
 \details{
 The way to indicate which part to choose in the email is through an
@@ -41,7 +42,7 @@ This class inherits from \code{\link{Instance}} and implements the
 \item{\bold{obtainDate}}{
 Function that obtain the date of the eml file. Call the function read_emails
 and obtain the date of the file indicated in the path and then transforms it
-into the generic date format that is "\%a \%b \%d \%H:\%M:\%S \%Z \%Y"
+into the generic date format, that is "\%a \%b \%d \%H:\%M:\%S \%Z \%Y"
 (Example: "Thu May 02 06:52:36 UTC 2013").
 \itemize{
 \item{\emph{Usage}}{
@@ -52,8 +53,8 @@ into the generic date format that is "\%a \%b \%d \%H:\%M:\%S \%Z \%Y"
 }
 
 \item{\bold{obtainSource}}{
-Function that obtain the source of the eml file. Call the function read_emails
-and obtain the source of the file indicated in the path. In addition it
+Function that obtains the source of the eml file. Calls the function read_emails
+and obtains the source of the file indicated in the path. In addition, it
 initializes the data with the initial source.
 \itemize{
 \item{\emph{Usage}}{

@@ -21,7 +21,7 @@ executed after this one).}
 }
 \description{
 The method of obtaining source is called which implement the
-subclasses of the superclass Instance.
+subclasses of the superclass \code{Instance}.
 }
 \details{
 In the case that the source obtained is empty or is not utf-8,

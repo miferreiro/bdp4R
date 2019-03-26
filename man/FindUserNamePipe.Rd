@@ -57,7 +57,7 @@ The instance with the modifications that have occurred in the pipe.
 (Instance) Instance to preproccess.
 }
 \item{\strong{removeUser}}{
-(logical) Indicate if the users are removed.
+(logical) Indicates if the users are removed.
 }
 }
 }
@@ -78,7 +78,7 @@ List with users found.
 \item{\emph{Arguments}}{
 \itemize{
 \item{\strong{data}}{
-(character) Text to preproccess.
+(character) Text in which the user names are searched.
 }
 }
 }

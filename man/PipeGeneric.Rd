@@ -31,7 +31,7 @@ Building...
 
 \itemize{
 \item{\bold{pipe}}{
-Abtract method to process the intance.
+Abtract method to preprocess the intance.
 \itemize{
 \item{\emph{Usage}}{
 
@@ -40,7 +40,7 @@ Abtract method to process the intance.
 \item{\emph{Arguments}}{
 \itemize{
 \item{\strong{instance}}{
-(Instance) Instance to preproccess.
+(Instance) Instance to preprocess.
 }
 }
 }

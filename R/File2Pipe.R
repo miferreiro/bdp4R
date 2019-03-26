@@ -1,6 +1,6 @@
 #' @title Class to obtain the source of an instance
 #' @description The method of obtaining source is called which implement the
-#' subclasses of the superclass Instance.
+#' subclasses of the superclass \code{Instance}.
 #' @docType class
 #' @usage File2Pipe$new(propertyName = "source",
 #'               alwaysBeforeDeps = list("TargetAssigningPipe"),

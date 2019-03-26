@@ -1,6 +1,7 @@
 #' @title Class to handle ttwt files
-#' @description It is a class that inherits from the Instance class and implements
-#' the functions of extracting the text and the date of an ttwt-type file.
+#' @description It is a class that inherits from the \code{Instance} class and
+#' implements the functions of extracting the text and the date of an ttwt-type
+#' file.
 #' @docType class
 #' @usage ExtractorTtwt$new(path)
 #' @param path  (character) Path of the ttwt-type file.
@@ -13,7 +14,7 @@
 #' @section Methods:
 #' \itemize{
 #' \item{\bold{obtainDate}}{
-#' Function that obtain the date of the ttwt file.
+#' Function that obtains the date of the ttwt file.
 #' \itemize{
 #' \item{\emph{Usage}}{
 #'
@@ -23,8 +24,8 @@
 #' }
 #'
 #' \item{\bold{obtainSource}}{
-#' Function that obtain the source of the ttwt file. Reads the file indicated in
-#' the path. In addition it initializes the data with the initial source.
+#' Function that obtains the source of the ttwt file. Reads the file indicated in
+#' the path. In addition, it initializes the data with the initial source.
 #' \itemize{
 #' \item{\emph{Usage}}{
 #'

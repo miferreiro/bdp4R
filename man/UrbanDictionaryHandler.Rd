@@ -29,7 +29,7 @@ Get the matches with the originalText and set it to replacementText.
 \itemize{
 \item{\emph{Usage}}{
 
-UrbanDictionaryHandler$new()$handle(originalText, replacementText, lang)
+\code{handle(originalText, replacementText, lang)}
 }
 \item{\emph{Value}}{
 
@@ -56,7 +56,7 @@ Get the matches with the originalText and set it to replacementText.
 \itemize{
 \item{\emph{Usage}}{
 
-UrbanDictionaryHandler$new()$getReplacement4SlangTerm(slangTerm, lang)
+\code{getReplacement4SlangTerm(slangTerm, lang)}
 }
 \item{\emph{Value}}{
 
@@ -80,19 +80,28 @@ Getter of path of slangs resources.
 \itemize{
 \item{\emph{Usage}}{
 
-UrbanDictionaryHandler$new()$getPathResourcesSlangs()
+\code{getPathResourcesSlangs()}
 }
 \item{\emph{Value}}{
 
-Value of pathResourcesSlangs variable
+Value of path of slangs eesources.
 }
 }
 }
 
+}
+}
+
+\section{Private fields}{
+
+\itemize{
+\item{\bold{pathResourcesSlangs}}{
+ (character) The path where are the resources.
+}
 }
 }
 
 \seealso{
-\code{\link{UnmatchedTextHandler}}
+\code{UnmatchedTextHandler}
 }
 \keyword{datasets}

@@ -78,10 +78,10 @@ TRUE or FALSE depending on whether the emoji is on the data.
 \item{\emph{Arguments}}{
 \itemize{
 \item{\strong{data}}{
-(character) Text to preproccess.
+(character) Text in which the emoji is searched.
 }
 \item{\strong{emoji}}{
-(character) Indicate the emoji to find.
+(character) Indicates the emoji to find.
 }
 }
 }
@@ -102,10 +102,10 @@ The data with emoji replaced.
 \item{\emph{Arguments}}{
 \itemize{
 \item{\strong{emoji}}{
-(character) Indicate the emoji to remove.
+(character) Indicates the emoji to remove.
 }
 \item{\strong{extendedEmoji}}{
-(character) Indicate the string to replace for the emoji found.
+(character) Indicates the string to replace for the emoji found.
 }
 \item{\strong{data}}{
 (character) Text in which emojis will be replaced.

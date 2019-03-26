@@ -39,7 +39,7 @@
 #' (Instance) Instance to preproccess.
 #' }
 #' \item{\strong{removeEmoticon}}{
-#' (logical) Indicate if the emoticons are replaced.
+#' (logical) Indicates if the emoticons are replaced.
 #' }
 #' }
 #' }
@@ -60,19 +60,19 @@
 #' \item{\emph{Arguments}}{
 #' \itemize{
 #' \item{\strong{data}}{
-#' (character) Text to preproccess.
+#' (character) Text in which the emoticons are searched.
 #' }
 #' }
 #' }
 #' }
 #' }
 #'
-#' \item{\bold{replaceEmoticon}}{
+#' \item{\bold{removeEmoticon}}{
 #' Function that removes the emoticons in the data.
 #' \itemize{
 #' \item{\emph{Usage}}{
 #'
-#' \code{replaceEmoticon(data)}
+#' \code{removeEmoticon(data)}
 #' }
 #' \item{\emph{Value}}{
 #'

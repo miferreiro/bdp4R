@@ -1,7 +1,3 @@
-#Private variables:
-#pathResourcesSlangs: (character) the path where are the resources
-#
-
 #' @title Class to get the match with the specific word from an Urban dictionary
 #' @description Class to get the match with the specific word from an
 #' Urban dictionary.
@@ -20,7 +16,7 @@
 #' \itemize{
 #' \item{\emph{Usage}}{
 #'
-#' UrbanDictionaryHandler$new()$handle(originalText, replacementText, lang)
+#' \code{handle(originalText, replacementText, lang)}
 #' }
 #' \item{\emph{Value}}{
 #'
@@ -47,7 +43,7 @@
 #' \itemize{
 #' \item{\emph{Usage}}{
 #'
-#' UrbanDictionaryHandler$new()$getReplacement4SlangTerm(slangTerm, lang)
+#' \code{getReplacement4SlangTerm(slangTerm, lang)}
 #' }
 #' \item{\emph{Value}}{
 #'
@@ -71,18 +67,25 @@
 #' \itemize{
 #' \item{\emph{Usage}}{
 #'
-#' UrbanDictionaryHandler$new()$getPathResourcesSlangs()
+#' \code{getPathResourcesSlangs()}
 #' }
 #' \item{\emph{Value}}{
 #'
-#' Value of pathResourcesSlangs variable
+#' Value of path of slangs eesources.
 #' }
 #' }
 #' }
 #'
 #' }
 #'
-#' @seealso \code{\link{UnmatchedTextHandler}}
+#' @section Private fields:
+#' \itemize{
+#' \item{\bold{pathResourcesSlangs}}{
+#'  (character) The path where are the resources.
+#' }
+#' }
+#'
+#' @seealso \code{UnmatchedTextHandler}
 #'
 #' @import R6
 #' @export UrbanDictionaryHandler

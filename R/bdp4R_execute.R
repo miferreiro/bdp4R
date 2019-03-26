@@ -14,7 +14,7 @@
 #'                      pathOutPutSynsets = "outputSynsets.RData")
 #'
 #' @return List of instances that have been preprocessed.
-#' @import streamR httr urltools tokenizers backports
+#' @import streamR urltools backports
 #' @importFrom purrr is_function
 #'
 #' @export bdp4R_execute

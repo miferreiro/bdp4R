@@ -11,6 +11,11 @@
 #                         that will increase when no more queries can be made
 #baseBabelNet: (character) url base to access the api rest
 #baseBabelfy: (character) url base to access the api rest
+#' @import R6 rlist httr R.lang tools backports
+#' @importFrom textutils trim
+#' @importFrom rjson fromJSON
+#' @importFrom ini read.ini
+
 BabelUtils <- R6Class(
 
   "BabelUtils",
@@ -39,10 +44,10 @@ BabelUtils <- R6Class(
       if (!"ini" %in% tools::file_ext(pathKeys)) {
         stop("[BabelUtils][initialize][Error]
                 Checking the extension of the file: pathKeys ",
-                  tools::file_ext(pathKeys))
+                  file_ext(pathKeys))
       }
 
-      private$keys <- ini::read.ini(pathKeys)$babelfy
+      private$keys <- read.ini(pathKeys)$babelfy
 
       if (is.null(private$keys)) {
         stop("[BabelUtils][initialize][Error]
@@ -105,7 +110,7 @@ BabelUtils <- R6Class(
 
       get_information_word <- GET(call)
       get_information_word <- httr::content(get_information_word, as = "text")
-      get_information_word <- jsonlite::fromJSON(get_information_word, flatten = TRUE)
+      get_information_word <- rjson::fromJSON(get_information_word, flatten = TRUE)
 
       while ("message" %in% names(get_information_word)
           && get_information_word$message %in% "Your key is not valid or the daily requests limit has been reached. Please visit http://babelnet.org.") {
@@ -153,7 +158,7 @@ BabelUtils <- R6Class(
 
         get_information_word <- GET(call)
         get_information_word <- httr::content(get_information_word , as = "text")
-        get_information_word <- jsonlite::fromJSON(get_information_word, flatten = TRUE)
+        get_information_word <- rjson::fromJSON(get_information_word, flatten = TRUE)
       }
 
       cat("[BabelUtils][isTermInBabelNet][Info]","The term: ", term, " :",
@@ -203,7 +208,7 @@ BabelUtils <- R6Class(
 
       get_information_synset <- GET(call)
       get_information_synset <- httr::content(get_information_synset, as = "text")
-      get_information_synset <- jsonlite::fromJSON(get_information_synset, flatten = TRUE)
+      get_information_synset <- rjson::fromJSON(get_information_synset, flatten = TRUE)
 
       while ("message" %in% names(get_information_synset)
           && get_information_synset$message %in% "Your key is not valid or the daily requests limit has been reached. Please visit http://babelnet.org.") {
@@ -247,7 +252,7 @@ BabelUtils <- R6Class(
 
         get_information_synset <- GET(call)
         get_information_synset <- httr::content(get_information_synset, as = "text")
-        get_information_synset <- jsonlite::fromJSON(get_information_synset, flatten = TRUE)
+        get_information_synset <- rjson::fromJSON(get_information_synset, flatten = TRUE)
       }
 
       if (length(get_information_synset$senses) > 0) {
@@ -343,7 +348,7 @@ BabelUtils <- R6Class(
 
         get_disambiguate_text <- GET(call)
         get_disambiguate_text <- httr::content(get_disambiguate_text, as = "text")
-        get_disambiguate_text <- jsonlite::fromJSON(get_disambiguate_text, flatten = TRUE)
+        get_disambiguate_text <- rjson::fromJSON(get_disambiguate_text, flatten = TRUE)
 
         while ("message" %in% names(get_disambiguate_text) &&
                get_disambiguate_text$message %in% "Your key is not valid or the daily requests limit has been reached. Please visit http://babelfy.org.") {
@@ -391,7 +396,7 @@ BabelUtils <- R6Class(
 
           get_disambiguate_text <- GET(call)
           get_disambiguate_text <- httr::content(get_disambiguate_text, as = "text")
-          get_disambiguate_text <- jsonlite::fromJSON(get_disambiguate_text, flatten = TRUE)
+          get_disambiguate_text <- rjson::fromJSON(get_disambiguate_text, flatten = TRUE)
         }
 
         if (length(get_disambiguate_text) > 0) {

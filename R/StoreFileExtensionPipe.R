@@ -31,7 +31,7 @@
 #' \item{\emph{Arguments}}{
 #' \itemize{
 #' \item{\strong{instance}}{
-#' (Instance) Instance to preproccess.
+#' (Instance) Instance to preprocess.
 #' }
 #' }
 #' }

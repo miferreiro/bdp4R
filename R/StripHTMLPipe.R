@@ -31,7 +31,7 @@
 #' \item{\emph{Arguments}}{
 #' \itemize{
 #' \item{\strong{instance}}{
-#' (Instance) Instance to preproccess.
+#' (Instance) Instance to preprocess.
 #' }
 #' }
 #' }
@@ -39,7 +39,7 @@
 #' }
 #'
 #' \item{\bold{getDataWithOutHtml}}{
-#' Function to get the data without html tags
+#' Function to gets the data without html tags
 #' \itemize{
 #' \item{\emph{Usage}}{
 #'
@@ -52,7 +52,7 @@
 #' \item{\emph{Arguments}}{
 #' \itemize{
 #' \item{\strong{data}}{
-#' (character) Text to remove html tags.
+#' (character) Text to removes html tags.
 #' }
 #' }
 #' }
@@ -60,7 +60,7 @@
 #' }
 #'
 #' \item{\bold{cleanText}}{
-#' Function to remove \\t,\\n and spaces from the text.
+#' Function to removes \\t,\\n and spaces from the text.
 #' \itemize{
 #' \item{\emph{Usage}}{
 #'
@@ -73,7 +73,7 @@
 #' \item{\emph{Arguments}}{
 #' \itemize{
 #' \item{\strong{plainText}}{
-#' (character) Text to remove \\t,\\n and spaces.
+#' (character) Text to removes \\t,\\n and spaces.
 #' }
 #' }
 #' }

@@ -130,7 +130,7 @@ Value of num max of from Youtube.
 
 \itemize{
 \item{\bold{keys}}{
- (list) Has the keys of twitter and youtube.
+ (list) The keys of twitter and youtube.
 }
 \item{\bold{numRequestToYoutube}}{
  (numeric) Indicates the number of requests made.
@@ -145,7 +145,7 @@ Value of num max of from Youtube.
  (logical) Indicates if the connection has been established with Twitter.
 }
 \item{\bold{twitterToken}}{
- (Token) Token to establish the connection to twitter
+ (Token) Token to establish the connection to twitter.
 }
 }
 }

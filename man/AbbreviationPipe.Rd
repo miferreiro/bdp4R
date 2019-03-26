@@ -32,7 +32,7 @@ replace the data abbreviations or not.
 }
 \details{
 This class needs files in json format that will contain the
-abbreviations to be located and the string that will replace them. For this
+abbreviations to be located and the string that will replace them. For this,
 it is necessary that the instance contains a property that indicates the
 language of the data to be able to correctly choose the list of abbreviations
 that apply to the data. The format of the file names of the resources has to
@@ -87,15 +87,15 @@ Function that checks if the abbreviation is in the data.
 }
 \item{\emph{Value}}{
 
-TRUE or FALSE depending on whether the abbreviation is on the data.
+TRUE or FALSE depending on whether the abbreviation is in the data.
 }
 \item{\emph{Arguments}}{
 \itemize{
 \item{\strong{data}}{
-(character) Text to preproccess.
+(character) Text in which the abbreviation is searched.
 }
 \item{\strong{abbreviation}}{
-(character) Indicate the abbreviation to find.
+(character) Indicates the abbreviation to find.
 }
 }
 }
@@ -116,10 +116,10 @@ The data with the abbreviatons replaced.
 \item{\emph{Arguments}}{
 \itemize{
 \item{\strong{abbreviation}}{
-(character) Indicate the abbreviation to replace.
+(character) Indicates the abbreviation to replace.
 }
 \item{\strong{extendedAbbreviation}}{
-(character) Indicate the string to replace for the abbreviations found.
+(character) Indicates the string to replace for the abbreviations found.
 }
 \item{\strong{data}}{
 (character) Text in which abbreviations will be replaced.

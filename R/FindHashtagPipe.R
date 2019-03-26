@@ -39,7 +39,7 @@
 #' (Instance) Instance to preproccess.
 #' }
 #' \item{\strong{removeHashtag}}{
-#' (logical) Indicate if the hashstags are replaced.
+#' (logical) Indicates if the hashstags are replaced.
 #' }
 #' }
 #' }
@@ -60,7 +60,7 @@
 #' \item{\emph{Arguments}}{
 #' \itemize{
 #' \item{\strong{data}}{
-#' (character) Text to preproccess.
+#' (character) Text in which the hashtags are searched.
 #' }
 #' }
 #' }

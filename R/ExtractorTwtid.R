@@ -1,15 +1,16 @@
 #' @title Class to handle twtid files
-#' @description It is a class that inherits from the Instance class and implements
-#' the functions of extracting the text and the date of an twtid-type file.
+#' @description It is a class that inherits from the \code{Instance} class and
+#' implements the functions of extracting the text and the date of an twtid-type
+#' file.
 #' @docType class
 #' @usage ExtractorTwtid$new(path)
 #' @param path  (character) Path of the twtid-type file.
-#' @details The connection to twitter is handled through the Connections class,
-#' which needs a configuration file with the necessary keys to make requests to
-#' the twitter API.
+#' @details The connection to twitter is handled through the \code{Connections}
+#' class, which needs a configuration file with the necessary keys to make
+#' requests to the twitter API.
 #'
 #' This class stores in the folder testFiles/cache/hsspam14/tweets the
-#' tweets processed so far, thus allowing you to save twitter queries. The text
+#' tweets processed so far, this allowing you to save twitter queries. The text
 #' fields, the date and the language of the tweet are stored.
 #'
 #' @section Inherit:
@@ -18,7 +19,7 @@
 #' @section Methods:
 #' \itemize{
 #' \item{\bold{obtainId}}{
-#' Function that obtain the id of the twtid. Read the id of the file indicated
+#' Function that obtains the id of the twtid. Reads the id of the file indicated
 #' in the variable path.
 #' \itemize{
 #' \item{\emph{Usage}}{
@@ -43,7 +44,7 @@
 #' }
 #'
 #' \item{\bold{obtainDate}}{
-#' Function that obtain the date of the twtid id. Check if the tweet has
+#' Function that obtains the date of the twtid id. Check if the tweet has
 #' previously been cached. In this case, the file is read in json format and the
 #' date is stored. Otherwise, the request is made on twitter. The date is then
 #' formatted to "\%a \%b \%d \%H:\%M:\%S \%Z \%Y"
@@ -57,7 +58,7 @@
 #' }
 #'
 #' \item{\bold{obtainSource}}{
-#' Function that obtain the source of the twtid id. Check if the tweet has
+#' Function that obtains the source of the twtid id. Check if the tweet has
 #' previously been cached. In this case, the file is read in json format and the
 #' source is stored. Otherwise, the request is made on twitter.
 #' \itemize{

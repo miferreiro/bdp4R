@@ -39,7 +39,7 @@
 #' (Instance) Instance to preproccess.
 #' }
 #' \item{\strong{removeUser}}{
-#' (logical) Indicate if the users are removed.
+#' (logical) Indicates if the users are removed.
 #' }
 #' }
 #' }
@@ -60,7 +60,7 @@
 #' \item{\emph{Arguments}}{
 #' \itemize{
 #' \item{\strong{data}}{
-#' (character) Text to preproccess.
+#' (character) Text in which the user names are searched.
 #' }
 #' }
 #' }
@@ -104,6 +104,7 @@
 #' @importFrom stringr str_match_all
 #' @importFrom stringr str_replace_all
 #' @export FindUserNamePipe
+
 FindUserNamePipe <- R6Class(
 
   "FindUserNamePipe",

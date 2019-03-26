@@ -65,7 +65,7 @@ Bdp4R <- R6Class(
 
   public = list(
 
-    initialize = function(pathKeys = "config/configurations.ini") {
+    initialize = function(pathKeys) {
 
       if (!"character" %in% class(pathKeys)) {
         stop("[Bdp4R][initialize][Error]
@@ -133,7 +133,7 @@ Bdp4R <- R6Class(
       Files <- list.files(path = pathFiles, recursive = TRUE, full.names = TRUE, all.files = TRUE)
       #Create the list of instances, which will contain the date, source, path, data
       #and a list of properties of the file that is in the indicated path
-      InstancesList <- sapply(Files, InstanceFactory$new()$createInstance)
+      InstancesList <- sapply(Files[1], InstanceFactory$new()$createInstance)
       cat("[Bdp4R][proccess_files][Info] ", "Has been created: ", length(InstancesList)," instances.\n")
       listInstances <- sapply(InstancesList, pipe$pipeAll)
 

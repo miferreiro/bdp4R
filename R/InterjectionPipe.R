@@ -51,7 +51,7 @@
 #' (Instance) Instance to preproccess.
 #' }
 #' \item{\strong{removeInterjections}}{
-#' (logical) Indicate if the interjections are removed or not.
+#' (logical) Indicates if the interjections are removed or not.
 #' }
 #' }
 #' }
@@ -72,7 +72,7 @@
 #' \item{\emph{Arguments}}{
 #' \itemize{
 #' \item{\strong{data}}{
-#' (character) Text to preproccess.
+#' (character) Text in which the interjection is searched.
 #' }
 #' \item{\strong{interjection}}{
 #' (character) Indicate the interjection to find.
@@ -96,7 +96,7 @@
 #' \item{\emph{Arguments}}{
 #' \itemize{
 #' \item{\strong{interjection}}{
-#' (character) Indicate the interjection to remove.
+#' (character) Indicates the interjection to remove.
 #' }
 #' \item{\strong{data}}{
 #' (character) Text in which interjections will be removed.

@@ -49,7 +49,7 @@ The instance with the modifications that have occurred in the pipe.
 \item{\emph{Arguments}}{
 \itemize{
 \item{\strong{instance}}{
-(Instance) Instance to preproccess.
+(Instance) Instance to preprocess.
 }
 }
 }

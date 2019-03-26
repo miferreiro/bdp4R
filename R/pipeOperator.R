@@ -16,7 +16,7 @@
 #'
 #' @import magrittr
 #' @export %>|%
-#'
+
 `%>|%` <- function(lhs, rhs) {
 
   parent <- parent.frame()
@@ -57,25 +57,26 @@
     }
   }
 }
-#'
-#' @title Apply to the list of functions sequentially and control if the
-#'        instance is invalid
-#' @description This function applies the first function to value, then the next
-#'              function to the result of the previous function call, etc.
-#'              Execute the functions and allow interruption if the instance is
-#'              invalid.
-#' @details This is the freduce method of the modified magrittr library in order
-#'          to stop the flow when the instance is invalid.
-#' @docType methods
-#' @param value Initial value.
-#' @param function_list A list of functions.
-#'
-#' @return The result after applying each function in turn.
-#'
-#' @seealso \code{\link{Instance}}
-#'
-#' @export freduce
-#'
+#
+# @title Apply to the list of functions sequentially and control if the
+#        instance is invalid
+# @description This function applies the first function to value, then the next
+#              function to the result of the previous function call, etc.
+#              Execute the functions and allow interruption if the instance is
+#              invalid.
+# @details This is the freduce method of the modified magrittr library in order
+#          to stop the flow when the instance is invalid.
+# @docType methods
+# @param value Initial value.
+# @param function_list A list of functions.
+#
+# @return The result after applying each function in turn.
+#
+# @seealso \code{\link{Instance}}
+#' @import magrittr
+# @export freduce
+#
+
 freduce = function(value, function_list)
 {
   k <- length(function_list)

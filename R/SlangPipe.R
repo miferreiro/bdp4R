@@ -72,10 +72,10 @@
 #' \item{\emph{Arguments}}{
 #' \itemize{
 #' \item{\strong{data}}{
-#' (character) Text to preproccess.
-#' }
+#' (character) Text in which the slang is searched.
 #' \item{\strong{slang}}{
-#' (character) Indicate the slang to find.
+#' (character) Indicates the slang to find.
+#' }
 #' }
 #' }
 #' }
@@ -96,10 +96,10 @@
 #' \item{\emph{Arguments}}{
 #' \itemize{
 #' \item{\strong{slang}}{
-#' (character) Indicate the slang to replace.
+#' (character) Indicates the slang to replace.
 #' }
 #' \item{\strong{extendedSlang}}{
-#' (character) Indicate the string to replace for the slangs found.
+#' (character) Indicates the string to replace for the slangs found.
 #' }
 #' \item{\strong{data}}{
 #' (character) Text in which slangs will be replaced.

@@ -115,7 +115,7 @@
 #' @section Private fields:
 #' \itemize{
 #' \item{\bold{keys}}{
-#'  (list) Has the keys of twitter and youtube.
+#'  (list) The keys of twitter and youtube.
 #' }
 #' \item{\bold{numRequestToYoutube}}{
 #'  (numeric) Indicates the number of requests made.
@@ -130,7 +130,7 @@
 #'  (logical) Indicates if the connection has been established with Twitter.
 #' }
 #' \item{\bold{twitterToken}}{
-#'  (Token) Token to establish the connection to twitter
+#'  (Token) Token to establish the connection to twitter.
 #' }
 #' }
 #'

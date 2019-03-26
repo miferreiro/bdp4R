@@ -17,7 +17,7 @@
 #' @param notAfterDeps (list) The dependences notAfter (pipes that cannot be
 #' executed after this one).
 #' @details This class needs files in json format that will contain the
-#' abbreviations to be located and the string that will replace them. For this
+#' abbreviations to be located and the string that will replace them. For this,
 #' it is necessary that the instance contains a property that indicates the
 #' language of the data to be able to correctly choose the list of abbreviations
 #' that apply to the data. The format of the file names of the resources has to
@@ -68,15 +68,15 @@
 #' }
 #' \item{\emph{Value}}{
 #'
-#' TRUE or FALSE depending on whether the abbreviation is on the data.
+#' TRUE or FALSE depending on whether the abbreviation is in the data.
 #' }
 #' \item{\emph{Arguments}}{
 #' \itemize{
 #' \item{\strong{data}}{
-#' (character) Text to preproccess.
+#' (character) Text in which the abbreviation is searched.
 #' }
 #' \item{\strong{abbreviation}}{
-#' (character) Indicate the abbreviation to find.
+#' (character) Indicates the abbreviation to find.
 #' }
 #' }
 #' }
@@ -97,10 +97,10 @@
 #' \item{\emph{Arguments}}{
 #' \itemize{
 #' \item{\strong{abbreviation}}{
-#' (character) Indicate the abbreviation to replace.
+#' (character) Indicates the abbreviation to replace.
 #' }
 #' \item{\strong{extendedAbbreviation}}{
-#' (character) Indicate the string to replace for the abbreviations found.
+#' (character) Indicates the string to replace for the abbreviations found.
 #' }
 #' \item{\strong{data}}{
 #' (character) Text in which abbreviations will be replaced.
@@ -296,7 +296,8 @@ AbbreviationPipe <- R6Class(
       if (is.na(instance$getData()) ||
           all(instance$getData() == "") ||
           is.null(instance$getData())) {
-        message <- c( "The file: " , instance$getPath() , " has data empty on pipe Abbreviation")
+        message <- c( "The file: " , instance$getPath() ,
+                      " has data empty on pipe Abbreviation")
         instance$addProperties(message, "reasonToInvalidate")
 
         cat("[AbbreviationPipe][pipe][Warning] ", message, " \n")
@@ -360,7 +361,9 @@ AbbreviationPipe <- R6Class(
                                  sep = "")
 
       return(gsub(regex(regularExpresion),
-                             paste(" ", extendedAbbreviation, " ", sep = ""), data, perl = T))
+                  paste(" ", extendedAbbreviation, " ", sep = ""),
+                  data,
+                  perl = T))
     },
 
     getPropertyLanguageName = function() {

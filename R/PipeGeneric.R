@@ -15,7 +15,7 @@
 #' @section Methods:
 #' \itemize{
 #' \item{\bold{pipe}}{
-#' Abtract method to process the intance.
+#' Abtract method to preprocess the intance.
 #' \itemize{
 #' \item{\emph{Usage}}{
 #'
@@ -24,7 +24,7 @@
 #' \item{\emph{Arguments}}{
 #' \itemize{
 #' \item{\strong{instance}}{
-#' (Instance) Instance to preproccess.
+#' (Instance) Instance to preprocess.
 #' }
 #' }
 #' }

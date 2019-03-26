@@ -71,7 +71,7 @@ The instance with the modifications that have occurred in the pipe.
 (Instance) Instance to preproccess.
 }
 \item{\strong{removeInterjections}}{
-(logical) Indicate if the interjections are removed or not.
+(logical) Indicates if the interjections are removed or not.
 }
 }
 }
@@ -92,7 +92,7 @@ TRUE or FALSE depending on whether the interjection is on the data.
 \item{\emph{Arguments}}{
 \itemize{
 \item{\strong{data}}{
-(character) Text to preproccess.
+(character) Text in which the interjection is searched.
 }
 \item{\strong{interjection}}{
 (character) Indicate the interjection to find.
@@ -116,7 +116,7 @@ The data with interjection removed.
 \item{\emph{Arguments}}{
 \itemize{
 \item{\strong{interjection}}{
-(character) Indicate the interjection to remove.
+(character) Indicates the interjection to remove.
 }
 \item{\strong{data}}{
 (character) Text in which interjections will be removed.

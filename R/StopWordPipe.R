@@ -51,7 +51,7 @@
 #' (Instance) Instance to preproccess.
 #' }
 #' \item{\strong{removeStopWords}}{
-#' (logical) Indicate if the stop words are removed or not.
+#' (logical) Indicates if the stop words are removed or not.
 #' }
 #' }
 #' }
@@ -72,10 +72,10 @@
 #' \item{\emph{Arguments}}{
 #' \itemize{
 #' \item{\strong{data}}{
-#' (character) Text to preproccess.
+#' (character) Text in which the stop word is searched.
 #' }
 #' \item{\strong{stopWord}}{
-#' (character) Indicate the stop word to find.
+#' (character) Indicates the stop word to find.
 #' }
 #' }
 #' }
@@ -96,7 +96,7 @@
 #' \item{\emph{Arguments}}{
 #' \itemize{
 #' \item{\strong{stopWord}}{
-#' (character) Indicate the stop word to remove.
+#' (character) Indicates the stop word to remove.
 #' }
 #' \item{\strong{data}}{
 #' (character) Text in which stop words will be removed.

@@ -42,7 +42,7 @@
 #' (Instance) Instance to preproccess.
 #' }
 #' \item{\strong{removeUrl}}{
-#' (logical) Indicate if the urls are removed.
+#' (logical) Indicates if the urls are removed.
 #' }
 #' \item{\strong{URLPatterns}}{
 #' (list) The regex to find urls.
