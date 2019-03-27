@@ -177,28 +177,32 @@ Connections <- R6Class(
 
         tryCatch(
           {
-            if (!file.exists(".rtweet_token.rds")) {
+            if (!file.exists(file.path(Sys.getenv("HOME"), ".rtweet_token.rds"))) {
               private$twitterToken <- create_token(
                 app = "my_twitter_research_app",
                 consumer_key = private$keys$twitter$ConsumerKey,
                 consumer_secret = private$keys$twitter$ConsumerSecret,
-                access_token = private$keys$twitter$AcessToken,
+                access_token = private$keys$twitter$AccessToken,
                 access_secret = private$keys$twitter$AccessTokenSecret,
                 set_renv = T)
             } else {
-              private$twitterToken <- readRDS(".rtweet_token.rds")
+              private$twitterToken <- readRDS(file.path(Sys.getenv("HOME"),
+                                                        ".rtweet_token.rds"))
             }
           }
           ,
 
           error = function(e) {
-            cat("[Connections][startConnectionWithTwitter][Error] Error on create_token \n")
+            print(e)
+            cat("[Connections][startConnectionWithTwitter][Error] Error on create_token",
+                  paste(e), "\n")
           }
         )
 
         private$connectionWithTwitter <- TRUE
 
-        cat("[Connections][startConectionWithTwitter][Info] Twitter: established connection\n")
+        cat("[Connections][startConectionWithTwitter][Info] Twitter: established ",
+            "connection\n")
       }
       return()
     },
@@ -249,7 +253,8 @@ Connections <- R6Class(
         private$connectionWithYoutube <- TRUE
 
 
-        cat("[Connections][startConnectionWithYoutube][Info] Youtube: established connection\n")
+        cat("[Connections][startConnectionWithYoutube][Info] Youtube: established",
+            "connection\n")
       }
 
       return()
