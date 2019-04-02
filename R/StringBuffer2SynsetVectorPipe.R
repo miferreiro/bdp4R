@@ -182,7 +182,7 @@
 #'
 #' @seealso \code{\link{PipeGeneric}}, \code{\link{Instance}}
 #'
-#' @import R6 tools pipeR tokenizers rlist R.lang
+#' @import R6 tools pipeR tokenizers rlist
 #' @importFrom rex regex
 #' @export StringBuffer2SynsetVectorPipe
 

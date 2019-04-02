@@ -6,7 +6,7 @@ Author: Miguel Ferreiro Díaz
 Description: More about what it does (maybe more than one line)
     Use four spaces whe
 URL: https://github.com/miferreiro/bdp4r
-Depends: R (<= 3.5.1)
+Depends: R (<= 3.5.3)
 Imports: 
         R6, stringi,
         rlist, XML,
@@ -22,7 +22,7 @@ Imports:
         ini, devtools,
         jwatjars, jwatr,
         rex, backports,
-        R.lang, tokenizers,
+        tokenizers,
 		urltools
 License: MIT
 Encoding: UTF-8

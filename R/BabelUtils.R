@@ -191,7 +191,7 @@
 #
 # @seealso \code{\link{BabelfyEntry}}
 #
-#' @import R6 rlist httr R.lang tools backports
+#' @import R6 rlist httr tools backports
 #' @importFrom textutils trim
 #' @importFrom jsonlite fromJSON
 #' @importFrom ini read.ini
@@ -443,10 +443,10 @@ BabelUtils <- R6Class(
 
         segment <- substr(remain, 0, self$getMaxBabelfyQuery())
 
-        splitPos <- R.lang::lastIndexOf(segment, ".")
+        splitPos <- indexOf(segment, ".", last = TRUE)
 
         if (splitPos == -1) {
-          splitPos <- R.lang::lastIndexOf(segment, " ")
+          splitPos <- indexOf(segment, " ", last = TRUE)
         }
 
         if (splitPos == -1) {
