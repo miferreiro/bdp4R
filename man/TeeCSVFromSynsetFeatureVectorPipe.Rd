@@ -3,7 +3,7 @@
 \docType{class}
 \name{TeeCSVFromSynsetFeatureVectorPipe}
 \alias{TeeCSVFromSynsetFeatureVectorPipe}
-\title{Class to complete the data.frame with the preprocessed instance and synsets}
+\title{Class to complete the csv with the preprocessed instance and synsets}
 \format{An object of class \code{R6ClassGenerator} of length 24.}
 \usage{
 TeeCSVFromSynsetFeatureVectorPipe$new(propertyName = "",
@@ -20,7 +20,7 @@ be executed before this one).}
 executed after this one).}
 }
 \description{
-Complete the data.frame with the preprocessed instance and synsets.
+Complete the csv with the preprocessed instance and synsets.
 }
 \details{
 It is necessary to identify the properties associated with the
@@ -37,12 +37,13 @@ This class inherit from \code{\link{PipeGeneric}} and implements the
 
 \itemize{
 \item{\bold{pipe}}{
-Function that complete the data.frame with the preprocessed instance and synsets.
+Function that complete the csv with the preprocessed instance and synsets.
 \itemize{
 \item{\emph{Usage}}{
 
 \code{pipe(instance, withData = TRUE, withSource = TRUE,
-listPropertySynsets = c("synsetVector", "synsetFeatureVector"))}
+listPropertySynsets = c("synsetVector", "synsetFeatureVector"),
+outPutPath = "dataFrameAllSynsets.csv")}
 }
 \item{\emph{Value}}{
 
@@ -54,13 +55,16 @@ The instance with the modifications that have occurred in the pipe.
 (Instance) Instance to preproccess.
 }
 \item{\strong{withData}}{
-(logical) Indicate if the data is added to data.frame.
+(logical) Indicate if the data is added to csv.
 }
 \item{\strong{withSource}}{
-(logical) Indicate if the source is added to data.frame.
+(logical) Indicate if the source is added to csv.
 }
 \item{\strong{listPropertySynsets}}{
 (character) vector indicating properties related to synsets.
+}
+\item{\strong{outPutPath}}{
+(character) name of the csv to store synsets and properties of the instance.
 }
 }
 }

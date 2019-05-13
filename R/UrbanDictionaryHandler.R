@@ -99,18 +99,6 @@ UrbanDictionaryHandler <- R6Class(
   public = list(
 
     initialize = function(pathResourcesSlangs = "resources/slangs-json") {
-      #
-      #Class constructor
-      #
-      #This constructor initialize the variable which contains the place where
-      #the resources of the abbreviations are stored.
-      #
-      #Args:
-      #   pathResourcesSlangs: (character) Path where are stored the
-      #                                           slangs resources
-      #Returns:
-      #   null
-      #
 
       if (!"character" %in% class(pathResourcesSlangs)) {
         stop("[UrbanDictionaryHandler][initialize][Error]
@@ -122,16 +110,7 @@ UrbanDictionaryHandler <- R6Class(
     },
 
     handle = function(originalText, replacementText, lang) {
-      #
-      #Get the matches with the originalText and set it to replacementText.
-      #
-      #Args:
-      #   originalText: (character)  The original text to replace
-      #   replacementText: (character) The word that matches with the originalText
-      #   lang: (character) The language of the original string
-      #Returns:
-      #   The word that matches with the originalText
-      #
+
       if (!"character" %in% class(originalText)) {
         stop("[UrbanDictionaryHandler][handle][Error]
                 Checking the type of the variable: originalText ",
@@ -157,15 +136,7 @@ UrbanDictionaryHandler <- R6Class(
     },
 
     getReplacement4SlangTerm = function(slangTerm, lang) {
-      #
-      #Get the matches with the originalText and set it to replacementText.
-      #
-      #Args:
-      #   slangTerm: (character) The original text to replace
-      #   lang: (character) The language of the original string
-      #Returns:
-      #   The word that matches with the originalText
-      #
+
       if (!"character" %in% class(slangTerm)) {
         stop("[UrbanDictionaryHandler][getReplacement4SlangTerm][Error]
                 Checking the type of the variable: slangTerm ",
@@ -201,15 +172,7 @@ UrbanDictionaryHandler <- R6Class(
     },
 
     getPathResourcesSlangs = function() {
-      #
-      #Getter of path of slangs resources
-      #
-      #Args:
-      #   null
-      #
-      #Returns:
-      #   value of pathResourcesSlangs variable
-      #
+
       return(private$pathResourcesSlangs)
     }
   ),

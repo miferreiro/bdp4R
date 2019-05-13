@@ -17,19 +17,11 @@ types of connections with babelfy and babelnet.}
 
 \item{resourceHandle}{(ResourceHandler) Initialize the object that manages the
 loading of the resource files, such as abbreviation, slang, stopword, etc.}
-
-\item{dataFrameAll}{(data.frame) Variable in which the data.frame generated
-by the pipes will be saved.}
-
-\item{dataFrameAllSynsets}{(data.frame) Variable in which a data.frame is
-built with the instance synsets.}
 }
 \description{
 It contains the "static" variables that will be used throughout
 the classes and the function that prepares and launches the execution of the
-pipes from the TypePipe object that is passed to it as an argument. Also,
-build the csvs / RDatas from the static variables of type data.frame,
-in this case, dataFrameAll and dataFrameAllSynsets.
+pipes from the TypePipe object that is passed to it as an argument.
 }
 \section{Methods}{
 
@@ -40,9 +32,7 @@ Preprocess files through a pipes' flow
 \item{\emph{Usage}}{
 
 \code{proccess_files(pathFiles,
-                     pipe,
-                     pathOutPut = "output.RData",
-                     pathOutPutSynsets = "outputSynsets.RData")}
+                     pipe)}
 }
 \item{\emph{Value}}{
 
@@ -55,14 +45,6 @@ List of instances that have been preprocessed.
 }
 \item{\strong{pipe}}{
 (TypePipe) Indicate if the abbreviations are replaced.
-}
-\item{\strong{pathOutPut}}{
-(character) Path of the file where the csv or dataFrame of the processed
-instances will be saved without the synsets.
-}
-\item{\strong{pathOutPutSynsets}}{
-(character) Path of the file where the csv or dataFrame of the processed
-instances will be saved with the synsets.
 }
 }
 }

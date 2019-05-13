@@ -106,43 +106,17 @@ ExtractorWarc <- R6Class(
 
       numRecords <- dim(xdfHtmlPlain)[1]
 
-      for (i in 1:numRecords) {
+      if (numRecords != 0 ) {
 
-        if (grepl("response",xdfHtmlPlain$warc_type[i])) {
+        for (i in 1:numRecords) {
 
-          charset <- toupper(str_match(pattern = "\\bcharset=\\s*\"?([^\\s;\"]*)",
-                                       xdfHtmlPlain$http_protocol_content_type[[i]])[2])
-
-          if (!is.na(charset) &&
-                guess_encoding(super$getPath())[[1]][[1]] == charset) {
-
-            payload <-
-              payload_content(
-                url = xdfHtmlPlain$target_uri[i],
-                ctype = xdfHtmlPlain$http_protocol_content_type[i],
-                headers = xdfHtmlPlain$http_raw_headers[[i]],
-                payload = xdfHtmlPlain$payload[[i]],
-                enconding = charset,
-                as = "text"
-              )
-
-             rawData <- list.append(rawData, payload)
-
-          } else {
-
-            rawData <- list.append(rawData,rawToChar(xdfHtmlPlain$payload[[1]]))
-
-          }
-
-        } else {
-
-          if (grepl("resource", xdfHtmlPlain$warc_type[i])) {
+          if (grepl("response",xdfHtmlPlain$warc_type[i])) {
 
             charset <- toupper(str_match(pattern = "\\bcharset=\\s*\"?([^\\s;\"]*)",
                                          xdfHtmlPlain$http_protocol_content_type[[i]])[2])
 
             if (!is.na(charset) &&
-                  guess_encoding(super$getPath())[[1]][[1]] == charset) {
+                guess_encoding(super$getPath())[[1]][[1]] == charset) {
 
               payload <-
                 payload_content(
@@ -158,8 +132,37 @@ ExtractorWarc <- R6Class(
 
             } else {
 
-              rawData <- list.append(rawData, rawToChar(xdfHtmlPlain$payload[[1]]))
+              rawData <- list.append(rawData,rawToChar(xdfHtmlPlain$payload[[1]]))
 
+            }
+
+          } else {
+
+            if (grepl("resource", xdfHtmlPlain$warc_type[i])) {
+
+              charset <- toupper(str_match(pattern = "\\bcharset=\\s*\"?([^\\s;\"]*)",
+                                           xdfHtmlPlain$http_protocol_content_type[[i]])[2])
+
+              if (!is.na(charset) &&
+                  guess_encoding(super$getPath())[[1]][[1]] == charset) {
+
+                payload <-
+                  payload_content(
+                    url = xdfHtmlPlain$target_uri[i],
+                    ctype = xdfHtmlPlain$http_protocol_content_type[i],
+                    headers = xdfHtmlPlain$http_raw_headers[[i]],
+                    payload = xdfHtmlPlain$payload[[i]],
+                    enconding = charset,
+                    as = "text"
+                  )
+
+                rawData <- list.append(rawData, payload)
+
+              } else {
+
+                rawData <- list.append(rawData, rawToChar(xdfHtmlPlain$payload[[1]]))
+
+              }
             }
           }
         }

@@ -170,7 +170,6 @@ FindEmojiPipe <- R6Class(
 
         if (self$findEmoji(instance$getData(), emoji)) {
 
-          cat("[FindEmojiPipe][pipe][Info] ", paste(emoji), " \n")
           emojisLocated <- list.append(emojisLocated, emoji)
         }
 

@@ -5,9 +5,7 @@
 \alias{bdp4R_execute}
 \title{Preproccess files through pipes}
 \usage{
-bdp4R_execute(pathKeys, pathFiles, pipe = SerialPipes$new(),
-                     pathOutPut = "output.RData",
-                     pathOutPutSynsets = "outputSynsets.RData")
+bdp4R_execute(pathKeys, pathFiles, pipe = SerialPipes$new())
 }
 \arguments{
 \item{pathKeys}{(character) Path where the file with keys are located.}
@@ -15,12 +13,6 @@ bdp4R_execute(pathKeys, pathFiles, pipe = SerialPipes$new(),
 \item{pathFiles}{(character) Path where the files to be preprocessed are located.}
 
 \item{pipe}{(TypePipe) Subclass of TypePipe, which implements the pipe method.}
-
-\item{pathOutPut}{(character) Path of the file where the csv or dataFrame of
-the processed instances will be saved without the synsets.}
-
-\item{pathOutPutSynsets}{(character) Path of the file where the csv or
-dataFrame of the preprocessed instances will be saved with the synsets.}
 }
 \value{
 List of instances that have been preprocessed.

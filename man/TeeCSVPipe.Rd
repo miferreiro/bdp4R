@@ -3,7 +3,7 @@
 \docType{class}
 \name{TeeCSVPipe}
 \alias{TeeCSVPipe}
-\title{Class to complete the data.frame with the preprocessed instance}
+\title{Class to complete the csv with the preprocessed instance}
 \format{An object of class \code{R6ClassGenerator} of length 24.}
 \usage{
 TeeCSVPipe$new(propertyName = "",
@@ -20,7 +20,7 @@ be executed before this one).}
 executed after this one).}
 }
 \description{
-Complete the data.frame with the preprocessed instance.
+Complete the csv with the preprocessed instance.
 }
 \details{
 Building...
@@ -35,11 +35,11 @@ This class inherits from \code{\link{PipeGeneric}} and implements the
 
 \itemize{
 \item{\bold{pipe}}{
-Function that complete the data.frame with the preprocessed instance.
+Function that complete the csv with the preprocessed instance.
 \itemize{
 \item{\emph{Usage}}{
 
-\code{pipe(instance, withData = TRUE, withSource = TRUE)}
+\code{pipe(instance, withData = TRUE, withSource = TRUE, outPutPath = "dataFrameAll.csv")}
 }
 \item{\emph{Value}}{
 
@@ -51,10 +51,13 @@ The instance with the modifications that have occurred in the pipe.
 (Instance) Instance to preproccess.
 }
 \item{\strong{withData}}{
-(logical) Indicate if the data is added to data.frame.
+(logical) Indicate if the data is added to csv.
 }
 \item{\strong{withSource}}{
-(logical) Indicate if the source is added to data.frame.
+(logical) Indicate if the source is added to csv.
+}
+\item{\strong{outPutPath}}{
+(logical) Indicate if the source is added to csv
 }
 }
 }

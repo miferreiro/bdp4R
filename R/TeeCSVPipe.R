@@ -1,5 +1,5 @@
-#' @title Class to complete the data.frame with the preprocessed instance
-#' @description Complete the data.frame with the preprocessed instance.
+#' @title Class to complete the csv with the preprocessed instance
+#' @description Complete the csv with the preprocessed instance.
 #' @docType class
 #' @usage TeeCSVPipe$new(propertyName = "",
 #'                alwaysBeforeDeps = list(),
@@ -16,11 +16,11 @@
 #' @section Methods:
 #' \itemize{
 #' \item{\bold{pipe}}{
-#' Function that complete the data.frame with the preprocessed instance.
+#' Function that complete the csv with the preprocessed instance.
 #' \itemize{
 #' \item{\emph{Usage}}{
 #'
-#' \code{pipe(instance, withData = TRUE, withSource = TRUE)}
+#' \code{pipe(instance, withData = TRUE, withSource = TRUE, outPutPath = "dataFrameAll.csv")}
 #' }
 #' \item{\emph{Value}}{
 #'
@@ -32,10 +32,13 @@
 #' (Instance) Instance to preproccess.
 #' }
 #' \item{\strong{withData}}{
-#' (logical) Indicate if the data is added to data.frame.
+#' (logical) Indicate if the data is added to csv.
 #' }
 #' \item{\strong{withSource}}{
-#' (logical) Indicate if the source is added to data.frame.
+#' (logical) Indicate if the source is added to csv.
+#' }
+#' \item{\strong{outPutPath}}{
+#' (logical) Indicate if the source is added to csv
 #' }
 #' }
 #' }
@@ -81,7 +84,7 @@ TeeCSVPipe <- R6Class(
       super$initialize(propertyName, alwaysBeforeDeps, notAfterDeps)
     },
 
-    pipe = function(instance, withData = TRUE, withSource = TRUE) {
+    pipe = function(instance, withData = TRUE, withSource = TRUE, outPutPath = "dataFrameAll.csv") {
 
       if (!"Instance" %in% class(instance)) {
         stop("[TeeCSVPipe][pipe][Error]
@@ -101,6 +104,18 @@ TeeCSVPipe <- R6Class(
                   class(withData))
       }
 
+      if (!"character" %in% class(outPutPath)) {
+        stop("[TeeCSVPipe][pipe][Error]
+                Checking the type of the variable: outPutPath ",
+                  class(outPutPath))
+      }
+
+      if (!"csv" %in% file_ext(outPutPath)) {
+        stop("[TeeCSVPipe][pipe][Error]
+                Checking the extension of the file: outPutPath ",
+                  file_ext(outPutPath))
+      }
+
       instance$addFlowPipes("TeeCSVPipe")
 
       if (!instance$checkCompatibility("TeeCSVPipe", self$getAlwaysBeforeDeps())) {
@@ -113,28 +128,45 @@ TeeCSVPipe <- R6Class(
         return(instance)
       }
 
-      pos <- dim(Bdp4R[["private_fields"]][["dataFrameAll"]])[1] + 1
+      if (file.exists(outPutPath)) {
+        dataFrameAll <- read.csv(file = outPutPath, header = TRUE,
+                                 sep = ";", dec = ".", fill = FALSE, stringsAsFactors = FALSE)
+      } else {
+        dataFrameAll <- data.frame()
+      }
 
-      Bdp4R[["private_fields"]][["dataFrameAll"]][pos, "path"] <- instance$getPath()
+      pos <- dim(dataFrameAll)[1] + 1
+
+      dataFrameAll[pos, "path"] <- instance$getPath()
 
       if (withData) {
-        Bdp4R[["private_fields"]][["dataFrameAll"]][pos, "data"] <- instance$getData()
+        dataFrameAll[pos, "data"] <- instance$getData()
       }
 
       if (withSource) {
-        Bdp4R[["private_fields"]][["dataFrameAll"]][pos, "source"] <-
+        dataFrameAll[pos, "source"] <-
           as.character(paste0(unlist(instance$getSource())))
       }
 
-      Bdp4R[["private_fields"]][["dataFrameAll"]][pos, "date"] <- instance$getDate()
+      dataFrameAll[pos, "date"] <- instance$getDate()
 
       namesPropertiesList <- as.list(instance$getNamesOfProperties())
       names(namesPropertiesList) <- instance$getNamesOfProperties()
 
       for (name in namesPropertiesList) {
-        Bdp4R[["private_fields"]][["dataFrameAll"]][pos, name] <-
+        dataFrameAll[pos, name] <-
           paste0(unlist(instance$getSpecificProperty(name)), collapse = "|")
       }
+
+      write.table(x = dataFrameAll,
+                  file = outPutPath,
+                  sep = ";",
+                  dec = ".",
+                  quote = T,
+                  col.names = TRUE,
+                  row.names = FALSE,
+                  qmethod = c("double"),
+                  fileEncoding = "UTF-8")
 
       return(instance)
     }

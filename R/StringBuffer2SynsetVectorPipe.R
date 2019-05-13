@@ -233,9 +233,6 @@ StringBuffer2SynsetVectorPipe <- R6Class(
 
       return(private$propertyLanguageName)
     },
-    # vUTH = list(UrbanDictionaryHandler$new(),
-    #             TyposHandler$new(),
-    #             ObfuscationHandler$new()),
     vUTH = list(),
     acceptedCharOnBeggining = "¿¡[(\"'",
     acceptedCharOnBegginingPattern = "^[¿¡\\[\\(\"'][¿¡\\[\\(\"']*",
@@ -412,10 +409,6 @@ StringBuffer2SynsetVectorPipe <- R6Class(
 
       returnValue <- Bdp4R[["private_fields"]][["babelUtils"]]$buildSynsetVector(fixedText, lang)
 
-      for (i in 1:length(returnValue)) {
-        Bdp4R[["private_fields"]][["synsetDictionary"]]$add(names(returnValue)[[i]])
-      }
-
       return(returnValue)
     },
 
@@ -427,7 +420,6 @@ StringBuffer2SynsetVectorPipe <- R6Class(
                   class(instance))
       }
 
-      cat("[StringBuffer2SynsetVectorPipe][pipe][Info]", "Data:", instance$getData(), "\n")
       sv <- SynsetVector$new(instance$getData())
 
       # Invalidate the instance if the language is not present

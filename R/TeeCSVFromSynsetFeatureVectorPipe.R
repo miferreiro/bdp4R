@@ -1,5 +1,5 @@
-#' @title Class to complete the data.frame with the preprocessed instance and synsets
-#' @description Complete the data.frame with the preprocessed instance and synsets.
+#' @title Class to complete the csv with the preprocessed instance and synsets
+#' @description Complete the csv with the preprocessed instance and synsets.
 #' @docType class
 #' @usage TeeCSVFromSynsetFeatureVectorPipe$new(propertyName = "",
 #'                                       alwaysBeforeDeps = list(),
@@ -19,12 +19,13 @@
 #' @section Methods:
 #' \itemize{
 #' \item{\bold{pipe}}{
-#' Function that complete the data.frame with the preprocessed instance and synsets.
+#' Function that complete the csv with the preprocessed instance and synsets.
 #' \itemize{
 #' \item{\emph{Usage}}{
 #'
 #' \code{pipe(instance, withData = TRUE, withSource = TRUE,
-#' listPropertySynsets = c("synsetVector", "synsetFeatureVector"))}
+#' listPropertySynsets = c("synsetVector", "synsetFeatureVector"),
+#' outPutPath = "dataFrameAllSynsets.csv")}
 #' }
 #' \item{\emph{Value}}{
 #'
@@ -36,13 +37,16 @@
 #' (Instance) Instance to preproccess.
 #' }
 #' \item{\strong{withData}}{
-#' (logical) Indicate if the data is added to data.frame.
+#' (logical) Indicate if the data is added to csv.
 #' }
 #' \item{\strong{withSource}}{
-#' (logical) Indicate if the source is added to data.frame.
+#' (logical) Indicate if the source is added to csv.
 #' }
 #' \item{\strong{listPropertySynsets}}{
 #' (character) vector indicating properties related to synsets.
+#' }
+#' \item{\strong{outPutPath}}{
+#' (character) name of the csv to store synsets and properties of the instance.
 #' }
 #' }
 #' }
@@ -88,7 +92,8 @@ TeeCSVFromSynsetFeatureVectorPipe <- R6Class(
     },
 
     pipe = function(instance, withData = TRUE, withSource = TRUE,
-                    listPropertySynsets = c("synsetVector", "synsetFeatureVector")) {
+                    listPropertySynsets = c("synsetVector", "synsetFeatureVector"),
+                    outPutPath = "dataFrameAllSynsets.csv") {
 
       if (!"Instance" %in% class(instance)) {
         stop("[TeeCSVFromSynsetFeatureVectorPipe][pipe][Error]
@@ -114,6 +119,18 @@ TeeCSVFromSynsetFeatureVectorPipe <- R6Class(
                   class(listPropertySynsets))
       }
 
+      if (!"character" %in% class(outPutPath)) {
+        stop("[TeeCSVFromSynsetFeatureVectorPipe][pipe][Error]
+                Checking the type of the variable: outPutPath ",
+                  class(outPutPath))
+      }
+
+      if (!"csv" %in% file_ext(outPutPath)) {
+        stop("[TeeCSVFromSynsetFeatureVectorPipe][pipe][Error]
+             Checking the extension of the file: outPutPath ",
+             file_ext(outPutPath))
+      }
+
       instance$addFlowPipes("TeeCSVFromSynsetFeatureVectorPipe")
 
       if (!instance$checkCompatibility("TeeCSVFromSynsetFeatureVectorPipe", self$getAlwaysBeforeDeps())) {
@@ -126,30 +143,32 @@ TeeCSVFromSynsetFeatureVectorPipe <- R6Class(
         return(instance)
       }
 
-      pos <- dim(Bdp4R[["private_fields"]][["dataFrameAllSynsets"]])[1] + 1
+      if (file.exists(outPutPath)) {
+        dataFrameAllSynsets <- read.csv(file = outPutPath, header = TRUE,
+                                        sep = ";", dec = ".", fill = FALSE, stringsAsFactors = FALSE)
+      } else {
+        dataFrameAllSynsets <- data.frame()
+      }
 
+      pos <- dim(dataFrameAllSynsets)[1] + 1
 
-      Bdp4R[["private_fields"]][["dataFrameAllSynsets"]][pos, "path"] <-
-        instance$getPath()
+      dataFrameAllSynsets[pos, "path"] <- instance$getPath()
 
       if (withData) {
-        Bdp4R[["private_fields"]][["dataFrameAllSynsets"]][pos, "data"] <-
-          instance$getData()
+        dataFrameAllSynsets[pos, "data"] <- instance$getData()
       }
 
       if (withSource) {
-        Bdp4R[["private_fields"]][["dataFrameAllSynsets"]][pos, "source"] <-
-          as.character(paste0(unlist(instance$getSource())))
+        dataFrameAllSynsets[pos, "source"] <- as.character(paste0(unlist(instance$getSource())))
       }
 
-      Bdp4R[["private_fields"]][["dataFrameAllSynsets"]][pos, "date"] <-
-        instance$getDate()
+      dataFrameAllSynsets[pos, "date"] <- instance$getDate()
 
       namesPropertiesList <- as.list(instance$getNamesOfProperties())
       names(namesPropertiesList) <- instance$getNamesOfProperties()
 
       for (name in list.remove(namesPropertiesList, listPropertySynsets)) {
-        Bdp4R[["private_fields"]][["dataFrameAllSynsets"]][pos, name] <-
+        dataFrameAllSynsets[pos, name] <-
           paste0(unlist(instance$getSpecificProperty(name)), collapse = "|")
       }
 
@@ -158,9 +177,18 @@ TeeCSVFromSynsetFeatureVectorPipe <- R6Class(
       synsetFeature <- synsets$getSynsetsFeature()
 
       for (synset in names(synsetFeature)) {
-        Bdp4R[["private_fields"]][["dataFrameAllSynsets"]][pos, synset] <-
-          synsetFeature[[synset]]
+        dataFrameAllSynsets[pos, synset] <- synsetFeature[[synset]]
       }
+
+      write.table(x = dataFrameAllSynsets,
+                  file = outPutPath,
+                  sep = ";",
+                  dec = ".",
+                  quote = T,
+                  col.names = TRUE,
+                  row.names = FALSE,
+                  qmethod = c("double"),
+                  fileEncoding = "UTF-8")
 
       return(instance)
     }
