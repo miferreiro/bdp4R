@@ -8,7 +8,6 @@
 \usage{
 AbbreviationPipe$new(propertyName = "abbreviation",
                      propertyLanguageName = "language",
-                     pathResourcesAbbreviations = "resources/abbreviations-json",
                      alwaysBeforeDeps = list("GuessLanguagePipe"),
                      notAfterDeps = list())
 }
@@ -16,8 +15,6 @@ AbbreviationPipe$new(propertyName = "abbreviation",
 \item{propertyName}{(character) Name of the property associated with the pipe.}
 
 \item{propertyLanguageName}{(character) Name of the language property.}
-
-\item{pathResourcesAbbreviations}{(character) Path where are stored the}
 
 \item{alwaysBeforeDeps}{(list) The dependences alwaysBefore (pipes that must
 be executed before this one).}
@@ -38,6 +35,10 @@ language of the data to be able to correctly choose the list of abbreviations
 that apply to the data. The format of the file names of the resources has to
 be: abbrev.xxx.json (Being xxx the value of the language property of the
 instance).
+
+To indicate the path where the associated resources are located, the
+configuration file is used. It is necessary to indicate in the section called
+resourcesPath, the path of resourcesAbbreviationsPath.
 
 The pipe will invalidate the instance in the moment that the resulting data is
 empty.
@@ -143,12 +144,12 @@ Value of name of property language.
 }
 }
 
-\item{\bold{getPathResourcesAbbreviations}}{
+\item{\bold{getResourcesAbbreviationsPath}}{
 Getter of path of abbreviations resources.
 \itemize{
 \item{\emph{Usage}}{
 
-\code{getPathResourcesAbbreviations()}
+\code{getResourcesAbbreviationsPath()}
 }
 \item{\emph{Value}}{
 
@@ -165,7 +166,7 @@ Value of path of abbreviations resources.
 \item{\bold{propertyLanguageName}}{
  (character) The name of property about language.
 }
-\item{\bold{pathResourcesAbbreviations}}{
+\item{\bold{resourcesAbbreviationsPath}}{
  (character) The path where are the resources.
 }
 }

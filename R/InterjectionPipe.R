@@ -5,13 +5,10 @@
 #' @docType class
 #' @usage InterjectionPipe$new(propertyName = "interjection",
 #'                      propertyLanguageName = "language",
-#'                      pathResourcesInterjections = "resources/interjections-json",
 #'                      alwaysBeforeDeps = list("GuessLanguagePipe"),
 #'                      notAfterDeps = list())
 #' @param propertyName  (character) Name of the property associated with the pipe.
 #' @param propertyLanguageName  (character) Name of the language property.
-#' @param pathResourcesInterjections (character) Path where are stored the
-#'  interjections resources.
 #' @param alwaysBeforeDeps (list) The dependences alwaysBefore (pipes that must
 #' be executed before this one).
 #' @param notAfterDeps (list) The dependences notAfter (pipes that cannot be
@@ -20,8 +17,16 @@
 #' interjections to be located. For this it is necessary that the instance
 #' contains a property that indicates the language of the data to be able to
 #' correctly choose the list of interjections that apply to the data. The format
-#'  of the file names of the resources has to be: interj.xxx.json (Being xxx the
-#'  value of the language property of the instance).
+#' of the file names of the resources has to be: interj.xxx.json (Being xxx the
+#' value of the language property of the instance).
+#'
+#' To indicate the path where the associated resources are located, the
+#' configuration file is used. It is necessary to indicate in the section called
+#' resourcesPath, the path of resourcesInterjectionsPath:
+#'
+#' [resourcesPath]
+#'
+#' resourcesInterjectionsPath = YourResourcesInterjectionsPath
 #'
 #' The pipe will invalidate the instance in the moment that the resulting data is
 #' empty.
@@ -120,12 +125,12 @@
 #' }
 #' }
 #'
-#' \item{\bold{getPathResourcesInterjections}}{
+#' \item{\bold{getResourcesInterjectionsPath}}{
 #' Getter of path of interjections resources.
 #' \itemize{
 #' \item{\emph{Usage}}{
 #'
-#' \code{getPathResourcesInterjections()}
+#' \code{getResourcesInterjectionsPath()}
 #' }
 #' \item{\emph{Value}}{
 #'
@@ -140,7 +145,7 @@
 #' \item{\bold{propertyLanguageName}}{
 #'  (character) The name of property about language.
 #' }
-#' \item{\bold{pathResourcesInterjections}}{
+#' \item{\bold{resourcesInterjectionsPath}}{
 #'  (character) The path where are the resources.
 #' }
 #' }
@@ -163,7 +168,6 @@ InterjectionPipe <- R6Class(
 
     initialize = function(propertyName = "interjection",
                           propertyLanguageName = "language",
-                          pathResourcesInterjections = "resources/interjections-json",
                           alwaysBeforeDeps = list("GuessLanguagePipe"),
                           notAfterDeps = list()) {
 
@@ -177,12 +181,6 @@ InterjectionPipe <- R6Class(
         stop("[InterjectionPipe][initialize][Error]
                 Checking the type of the variable: propertyLanguageName ",
                   class(propertyLanguageName))
-      }
-
-      if (!"character" %in% class(pathResourcesInterjections)) {
-        stop("[InterjectionPipe][initialize][Error]
-                Checking the type of the variable: pathResourcesInterjections ",
-                  class(pathResourcesInterjections))
       }
 
       if (!"list" %in% class(alwaysBeforeDeps)) {
@@ -199,7 +197,8 @@ InterjectionPipe <- R6Class(
       super$initialize(propertyName, alwaysBeforeDeps, notAfterDeps)
 
       private$propertyLanguageName <- propertyLanguageName
-      private$pathResourcesInterjections <- pathResourcesInterjections
+
+      private$resourcesInterjectionsPath <- read.ini(Bdp4R[["private_fields"]][["configurationFilePath"]])$resourcesPath$resourcesInterjectionsPath
 
     },
 
@@ -243,13 +242,13 @@ InterjectionPipe <- R6Class(
         return(instance)
       }
 
-      JsonFile <- paste(self$getPathResourcesInterjections(),
+      JsonFile <- paste(self$getResourcesInterjectionsPath(),
                         "/interj.",
                         languageInstance,
                         ".json",
                         sep = "")
 
-      jsonData <- Bdp4R[["private_fields"]][["resourceHandle"]]$isLoadResource(JsonFile)
+      jsonData <- Bdp4R[["private_fields"]][["resourceHandler"]]$isLoadResource(JsonFile)
 
       if (!is.null(jsonData)) {
 
@@ -357,14 +356,14 @@ InterjectionPipe <- R6Class(
       return(private$propertyLanguageName)
     },
 
-    getPathResourcesInterjections = function() {
+    getResourcesInterjectionsPath = function() {
 
-      return(private$pathResourcesInterjections)
+      return(private$resourcesInterjectionsPath)
     }
   ),
 
   private = list(
     propertyLanguageName = "",
-    pathResourcesInterjections = ""
+    resourcesInterjectionsPath = ""
   )
 )

@@ -5,13 +5,10 @@
 #' @docType class
 #' @usage ContractionsPipe$new(propertyName = "contractions",
 #'                      propertyLanguageName = "language",
-#'                      pathResourcesContractions = "resources/contractions-json",
 #'                      alwaysBeforeDeps = list("GuessLanguagePipe"),
 #'                      notAfterDeps = list())
 #' @param propertyName  (character) Name of the property associated with the pipe.
 #' @param propertyLanguageName  (character) Name of the language property.
-#' @param pathResourcesContractions (character) Path where are stored the
-#  contractions resources.
 #' @param alwaysBeforeDeps (list) The dependences alwaysBefore (pipes that must
 #' be executed before this one).
 #' @param notAfterDeps (list) The dependences notAfter (pipes that cannot be
@@ -23,6 +20,14 @@
 #' that apply to the data. The format of the file names of the resources has to
 #' be: contr.xxx.json (Being xxx the value of the language property of the
 #' instance).
+#'
+#' To indicate the path where the associated resources are located, the
+#' configuration file is used. It is necessary to indicate in the section called
+#' resourcesPath, the path of resourcesContractionsPath:
+#'
+#' [resourcesPath]
+#'
+#' resourcesContractionsPath = YourResourcesContractionsPath
 #'
 #' The pipe will invalidate the instance in the moment that the resulting data is
 #' empty.
@@ -124,12 +129,12 @@
 #' }
 #' }
 #'
-#' \item{\bold{getPathResourcesContractions}}{
+#' \item{\bold{getResourcesContractionsPath}}{
 #' Getter of path of contractions resources.
 #' \itemize{
 #' \item{\emph{Usage}}{
 #'
-#' \code{getPathResourcesContractions()}
+#' \code{getResourcesContractionsPath()}
 #' }
 #' \item{\emph{Value}}{
 #'
@@ -144,7 +149,7 @@
 #' \item{\bold{propertyLanguageName}}{
 #'  (character) The name of property about language.
 #' }
-#' \item{\bold{pathResourcesContractions}}{
+#' \item{\bold{resourcesContractionsPath}}{
 #'  (character) The path where are the resources.
 #' }
 #' }
@@ -168,7 +173,6 @@ ContractionsPipe <- R6Class(
 
     initialize = function(propertyName = "contractions",
                           propertyLanguageName = "language",
-                          pathResourcesContractions = "resources/contractions-json",
                           alwaysBeforeDeps = list("GuessLanguagePipe"),
                           notAfterDeps = list()) {
 
@@ -182,12 +186,6 @@ ContractionsPipe <- R6Class(
         stop("[ContractionsPipe][initialize][Error]
                 Checking the type of the variable: propertyLanguageName ",
                   class(propertyLanguageName))
-      }
-
-      if (!"character" %in% class(pathResourcesContractions)) {
-        stop("[ContractionsPipe][initialize][Error]
-                Checking the type of the variable: pathResourcesContractions ",
-                  class(pathResourcesContractions))
       }
 
       if (!"list" %in% class(alwaysBeforeDeps)) {
@@ -204,7 +202,9 @@ ContractionsPipe <- R6Class(
       super$initialize(propertyName, alwaysBeforeDeps, notAfterDeps)
 
       private$propertyLanguageName <- propertyLanguageName
-      private$pathResourcesContractions <- pathResourcesContractions
+
+      private$resourcesContractionsPath <- read.ini(Bdp4R[["private_fields"]][["configurationFilePath"]])$resourcesPath$resourcesContractionsPath
+
     },
 
     pipe = function(instance, replaceContractions = TRUE) {
@@ -247,13 +247,13 @@ ContractionsPipe <- R6Class(
 
       }
 
-      JsonFile <- paste(self$getPathResourcesContractions(),
+      JsonFile <- paste(self$getResourcesContractionsPath(),
                         "/contr.",
                         languageInstance,
                         ".json",
                         sep = "")
 
-      jsonData <- Bdp4R[["private_fields"]][["resourceHandle"]]$isLoadResource(JsonFile)
+      jsonData <- Bdp4R[["private_fields"]][["resourceHandler"]]$isLoadResource(JsonFile)
 
       #It is verified that there is a resource associated to the language of the instance
       if (!is.null(jsonData)) {
@@ -372,14 +372,14 @@ ContractionsPipe <- R6Class(
       return(private$propertyLanguageName)
     },
 
-    getPathResourcesContractions = function() {
+    getResourcesContractionsPath = function() {
 
-      return(private$pathResourcesContractions)
+      return(private$resourcesContractionsPath)
     }
   ),
 
   private = list(
     propertyLanguageName = "",
-    pathResourcesContractions = ""
+    resourcesContractionsPath = ""
   )
 )

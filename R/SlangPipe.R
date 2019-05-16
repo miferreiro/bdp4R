@@ -5,13 +5,10 @@
 #' @docType class
 #' @usage SlangPipe$new(propertyName = "langpropname",
 #'               propertyLanguageName = "language",
-#'               pathResourcesSlangs = "resources/slangs-json",
 #'               alwaysBeforeDeps = list("GuessLanguagePipe"),
 #'               notAfterDeps = list())
 #' @param propertyName  (character) Name of the property associated with the pipe.
 #' @param propertyLanguageName  (character) Name of the language property.
-#' @param pathResourcesSlangs (character) Path where are stored the slangs
-#' resources.
 #' @param alwaysBeforeDeps (list) The dependences alwaysBefore (pipes that must
 #' be executed before this one).
 #' @param notAfterDeps (list) The dependences notAfter (pipes that cannot be
@@ -22,6 +19,14 @@
 #' to be able to correctly choose the list of slangs that apply to the data.
 #' The format of the file names of the resources has to be: slang.xxx.json
 #' (Being xxx the value of the language property of the instance).
+#'
+#' To indicate the path where the associated resources are located, the
+#' configuration file is used. It is necessary to indicate in the section called
+#' resourcesPath, the path of resourcesSlangsPath:
+#'
+#' [resourcesPath]
+#'
+#' resourcesSlangsPath = YourResourcesSlangsPath
 #'
 #' The pipe will invalidate the instance in the moment that the resulting data is
 #' empty.
@@ -123,12 +128,12 @@
 #' }
 #' }
 #'
-#' \item{\bold{getPathResourcesSlangs}}{
+#' \item{\bold{getResourcesSlangsPath}}{
 #' Getter of path of slangs resources.
 #' \itemize{
 #' \item{\emph{Usage}}{
 #'
-#' \code{getPathResourcesSlangs()}
+#' \code{getResourcesSlangsPath()}
 #' }
 #' \item{\emph{Value}}{
 #'
@@ -143,7 +148,7 @@
 #' \item{\bold{propertyLanguageName}}{
 #'  (character) The name of property about language.
 #' }
-#' \item{\bold{pathResourcesSlangs}}{
+#' \item{\bold{resourcesSlangsPath}}{
 #'  (character) The path where are the resources.
 #' }
 #' }
@@ -167,7 +172,6 @@ SlangPipe <- R6Class(
 
     initialize = function(propertyName = "langpropname",
                           propertyLanguageName = "language",
-                          pathResourcesSlangs = "resources/slangs-json",
                           alwaysBeforeDeps = list("GuessLanguagePipe"),
                           notAfterDeps = list()) {
 
@@ -181,12 +185,6 @@ SlangPipe <- R6Class(
         stop("[SlangPipe][initialize][Error]
                 Checking the type of the variable: propertyLanguageName ",
                   class(propertyLanguageName))
-      }
-
-      if (!"character" %in% class(pathResourcesSlangs)) {
-        stop("[SlangPipe][initialize][Error]
-                Checking the type of the variable: pathResourcesSlangs ",
-                  class(pathResourcesSlangs))
       }
 
       if (!"list" %in% class(alwaysBeforeDeps)) {
@@ -203,7 +201,9 @@ SlangPipe <- R6Class(
       super$initialize(propertyName, alwaysBeforeDeps, notAfterDeps)
 
       private$propertyLanguageName <- propertyLanguageName
-      private$pathResourcesSlangs <- pathResourcesSlangs
+
+      private$resourcesSlangsPath <- read.ini(Bdp4R[["private_fields"]][["configurationFilePath"]])$resources$pathResourcesSlangsPath
+
     },
 
     pipe = function(instance, replaceSlangs = TRUE) {
@@ -246,13 +246,13 @@ SlangPipe <- R6Class(
         return(instance)
       }
 
-      JsonFile <- paste(self$getPathResourcesSlangs(),
+      JsonFile <- paste(self$getResourcesSlangsPath(),
                         "/slang.",
                         languageInstance,
                         ".json",
                         sep = "")
 
-      jsonData <- Bdp4R[["private_fields"]][["resourceHandle"]]$isLoadResource(JsonFile)
+      jsonData <- Bdp4R[["private_fields"]][["resourceHandler"]]$isLoadResource(JsonFile)
 
       if (!is.null(jsonData)) {
 
@@ -365,14 +365,14 @@ SlangPipe <- R6Class(
       return(private$propertyLanguageName)
     },
 
-    getPathResourcesSlangs = function() {
+    getResourcesSlangsPath = function() {
 
-      return(private$pathResourcesSlangs)
+      return(private$resourcesSlangsPath)
     }
   ),
 
   private = list(
     propertyLanguageName = "",
-    pathResourcesSlangs = ""
+    resourcesSlangsPath = ""
   )
 )

@@ -6,10 +6,10 @@
 \title{Class to manage the connections with twitter and youtube}
 \format{An object of class \code{R6ClassGenerator} of length 24.}
 \usage{
-Connections$new(pathKeys)
+Connections$new(keysPath)
 }
 \arguments{
-\item{pathKeys}{(character) Path of the .ini file that contains the keys.}
+\item{keysPath}{(character) Path of the .ini file that contains the keys.}
 }
 \description{
 The tasks of the functions that the Connections class has are to

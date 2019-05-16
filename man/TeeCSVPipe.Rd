@@ -39,7 +39,7 @@ Function that complete the csv with the preprocessed instance.
 \itemize{
 \item{\emph{Usage}}{
 
-\code{pipe(instance, withData = TRUE, withSource = TRUE, outPutPath = "dataFrameAll.csv")}
+\code{pipe(instance, withData = TRUE, withSource = TRUE)}
 }
 \item{\emph{Value}}{
 
@@ -55,9 +55,6 @@ The instance with the modifications that have occurred in the pipe.
 }
 \item{\strong{withSource}}{
 (logical) Indicate if the source is added to csv.
-}
-\item{\strong{outPutPath}}{
-(logical) Indicate if the source is added to csv
 }
 }
 }

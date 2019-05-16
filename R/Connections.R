@@ -2,8 +2,8 @@
 #' @description The tasks of the functions that the Connections class has are to
 #' establish the connections and control the number of requests that have been made.
 #' @docType class
-#' @usage Connections$new(pathKeys)
-#' @param pathKeys  (character) Path of the .ini file that contains the keys.
+#' @usage Connections$new(keysPath)
+#' @param keysPath  (character) Path of the .ini file that contains the keys.
 #' @details The way to indicate the keys of youtube and twitter has to be
 #' through an .ini file that contains the following structure:
 #'
@@ -145,21 +145,21 @@ Connections <- R6Class(
 
   public = list(
 
-    initialize = function(pathKeys) {
+    initialize = function(keysPath) {
 
-      if (!"character" %in% class(pathKeys)) {
+      if (!"character" %in% class(keysPath)) {
         stop("[Connections][initialize][Error]
-                Checking the type of the variable: pathKeys ",
-                  class(pathKeys))
+                Checking the type of the variable: keysPath ",
+                  class(keysPath))
       }
 
-      if (!"ini" %in% file_ext(pathKeys)) {
+      if (!"ini" %in% file_ext(keysPath)) {
         stop("[Connections][initialize][Error]
-                Checking the extension of the file: pathKeys ",
-                  file_ext(pathKeys))
+                Checking the extension of the file: keysPath ",
+                  file_ext(keysPath))
       }
 
-      private$keys <- read.ini(pathKeys)
+      private$keys <- read.ini(keysPath)
 
     },
 
@@ -185,6 +185,8 @@ Connections <- R6Class(
                 access_token = private$keys$twitter$AccessToken,
                 access_secret = private$keys$twitter$AccessTokenSecret,
                 set_renv = T)
+                saveRDS(object = private$twitterToken,
+                        file = file.path(Sys.getenv("HOME"),".rtweet_token.rds"))
             } else {
               private$twitterToken <- readRDS(file.path(Sys.getenv("HOME"),
                                                         ".rtweet_token.rds"))

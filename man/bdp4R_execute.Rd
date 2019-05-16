@@ -5,12 +5,12 @@
 \alias{bdp4R_execute}
 \title{Preproccess files through pipes}
 \usage{
-bdp4R_execute(pathKeys, pathFiles, pipe = SerialPipes$new())
+bdp4R_execute(configurationFilePath, filesPath, pipe = SerialPipes$new())
 }
 \arguments{
-\item{pathKeys}{(character) Path where the file with keys are located.}
+\item{configurationFilePath}{(character) Path where the file with keys are located.}
 
-\item{pathFiles}{(character) Path where the files to be preprocessed are located.}
+\item{filesPath}{(character) Path where the files to be preprocessed are located.}
 
 \item{pipe}{(TypePipe) Subclass of TypePipe, which implements the pipe method.}
 }

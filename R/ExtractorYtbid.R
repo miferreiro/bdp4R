@@ -9,9 +9,13 @@
 #' class, which needs a configuration file with the necessary keys to make
 #' requests to the youtube API.
 #'
-#' This class stores in the folder testFiles/cache/youtube/comments the
+#' This class stores in the folder indicates in the file configuration the
 #' comments processed so far, thus allowing you to save youtuve queries.
 #' The text fields and the date of the comment are stored.
+#'
+#' The file configuration has to have the section cache with the value of the
+#' cachePathYtbid. This variable has to be the path to store the tweets and it is
+#' neccesary that it has two folder named: "_spam_" and "_ham_"
 #'
 #' @section Inherit:
 #' This class inherits from \code{\link{Instance}} and implements the
@@ -115,10 +119,12 @@ ExtractorYtbid <- R6Class(
 
     obtainDate = function() {
 
+      cachePath <- read.ini(Bdp4R[["private_fields"]][["configurationFilePath"]])$cache$cachePathYtbid
+
       if (file.exists(
         paste(
-          "testFiles/cache/youtube/",
-          "comments/_",
+          cachePath,
+          "/_",
           super$getSpecificProperty("target"),
           "_/",
           self$getId(),
@@ -129,8 +135,8 @@ ExtractorYtbid <- R6Class(
 
         private$path <-
           paste(
-            "testFiles/cache/youtube/",
-            "comments/_",
+            cachePath,
+            "/_",
             super$getSpecificProperty("target"),
             "_/",
             self$getId(),
@@ -229,8 +235,8 @@ ExtractorYtbid <- R6Class(
         cat(
           exportJSON,
           file = paste(
-            "testFiles/cache/youtube/",
-            "comments/_",
+            cachePath,
+            "/_",
             super$getSpecificProperty("target"),
             "_/",
             self$getId(),
@@ -254,8 +260,8 @@ ExtractorYtbid <- R6Class(
         cat(
           exportJSON,
           file = paste(
-            "testFiles/cache/youtube/",
-            "comments/_",
+            cachePath,
+            "/_",
             super$getSpecificProperty("target"),
             "_/",
             self$getId(),
@@ -271,10 +277,12 @@ ExtractorYtbid <- R6Class(
 
     obtainSource = function() {
 
+      cachePath <- read.ini(Bdp4R[["private_fields"]][["configurationFilePath"]])$cache$cachePathYtbid
+
       if (file.exists(
         paste(
-          "testFiles/cache/youtube/",
-          "comments/_",
+          cachePath,
+          "/_",
           super$getSpecificProperty("target"),
           "_/",
           self$getId(),
@@ -284,8 +292,8 @@ ExtractorYtbid <- R6Class(
       )) {
         private$path <-
           paste(
-            "testFiles/cache/youtube/",
-            "comments/_",
+            cachePath,
+            "/_",
             super$getSpecificProperty("target"),
             "_/",
             self$getId(),
@@ -392,8 +400,8 @@ ExtractorYtbid <- R6Class(
         cat(
           exportJSON,
           file = paste(
-            "testFiles/cache/youtube/",
-            "comments/_",
+            cachePath,
+            "/_",
             super$getSpecificProperty("target"),
             "_/",
             self$getId(),
@@ -415,8 +423,8 @@ ExtractorYtbid <- R6Class(
         cat(
           exportJSON,
           file = paste(
-            "testFiles/cache/youtube/",
-            "comments/_",
+            cachePath,
+            "/_",
             super$getSpecificProperty("target"),
             "_/",
             self$getId(),

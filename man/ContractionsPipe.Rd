@@ -8,7 +8,6 @@
 \usage{
 ContractionsPipe$new(propertyName = "contractions",
                      propertyLanguageName = "language",
-                     pathResourcesContractions = "resources/contractions-json",
                      alwaysBeforeDeps = list("GuessLanguagePipe"),
                      notAfterDeps = list())
 }
@@ -16,8 +15,6 @@ ContractionsPipe$new(propertyName = "contractions",
 \item{propertyName}{(character) Name of the property associated with the pipe.}
 
 \item{propertyLanguageName}{(character) Name of the language property.}
-
-\item{pathResourcesContractions}{(character) Path where are stored the}
 
 \item{alwaysBeforeDeps}{(list) The dependences alwaysBefore (pipes that must
 be executed before this one).}
@@ -38,6 +35,10 @@ language of the data to be able to correctly choose the list of contractions
 that apply to the data. The format of the file names of the resources has to
 be: contr.xxx.json (Being xxx the value of the language property of the
 instance).
+
+To indicate the path where the associated resources are located, the
+configuration file is used. It is necessary to indicate in the section called
+resourcesPath, the path of resourcesContractionsPath.
 
 The pipe will invalidate the instance in the moment that the resulting data is
 empty.
@@ -143,12 +144,12 @@ Value of name of property language.
 }
 }
 
-\item{\bold{getPathResourcesContractions}}{
+\item{\bold{getResourcesContractionsPath}}{
 Getter of path of contractions resources.
 \itemize{
 \item{\emph{Usage}}{
 
-\code{getPathResourcesContractions()}
+\code{getResourcesContractionsPath()}
 }
 \item{\emph{Value}}{
 
@@ -165,7 +166,7 @@ Value of path of contractions resources.
 \item{\bold{propertyLanguageName}}{
  (character) The name of property about language.
 }
-\item{\bold{pathResourcesContractions}}{
+\item{\bold{resourcesContractionsPath}}{
  (character) The path where are the resources.
 }
 }

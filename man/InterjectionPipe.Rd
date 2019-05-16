@@ -8,7 +8,6 @@
 \usage{
 InterjectionPipe$new(propertyName = "interjection",
                      propertyLanguageName = "language",
-                     pathResourcesInterjections = "resources/interjections-json",
                      alwaysBeforeDeps = list("GuessLanguagePipe"),
                      notAfterDeps = list())
 }
@@ -16,9 +15,6 @@ InterjectionPipe$new(propertyName = "interjection",
 \item{propertyName}{(character) Name of the property associated with the pipe.}
 
 \item{propertyLanguageName}{(character) Name of the language property.}
-
-\item{pathResourcesInterjections}{(character) Path where are stored the
-interjections resources.}
 
 \item{alwaysBeforeDeps}{(list) The dependences alwaysBefore (pipes that must
 be executed before this one).}
@@ -36,8 +32,12 @@ This class needs files in json format that will contain the
 interjections to be located. For this it is necessary that the instance
 contains a property that indicates the language of the data to be able to
 correctly choose the list of interjections that apply to the data. The format
- of the file names of the resources has to be: interj.xxx.json (Being xxx the
- value of the language property of the instance).
+of the file names of the resources has to be: interj.xxx.json (Being xxx the
+value of the language property of the instance).
+
+To indicate the path where the associated resources are located, the
+configuration file is used. It is necessary to indicate in the section called
+resourcesPath, the path of resourcesInterjectionsPath.
 
 The pipe will invalidate the instance in the moment that the resulting data is
 empty.
@@ -140,12 +140,12 @@ Value of name of property language.
 }
 }
 
-\item{\bold{getPathResourcesInterjections}}{
+\item{\bold{getResourcesInterjectionsPath}}{
 Getter of path of interjections resources.
 \itemize{
 \item{\emph{Usage}}{
 
-\code{getPathResourcesInterjections()}
+\code{getResourcesInterjectionsPath()}
 }
 \item{\emph{Value}}{
 
@@ -162,7 +162,7 @@ Value of path of interjections resources.
 \item{\bold{propertyLanguageName}}{
  (character) The name of property about language.
 }
-\item{\bold{pathResourcesInterjections}}{
+\item{\bold{resourcesInterjectionsPath}}{
  (character) The path where are the resources.
 }
 }

@@ -6,13 +6,10 @@
 \title{Class to handle eml files}
 \format{An object of class \code{R6ClassGenerator} of length 24.}
 \usage{
-ExtractorSms$new(path, pathKeys = "config/configurations.ini")
+ExtractorSms$new(path)
 }
 \arguments{
 \item{path}{(character) Path of the eml-type file.}
-
-\item{pathKeys}{(character) Path of the .ini file that contains the
-configurations to read the eml files.}
 }
 \description{
 It is a class that inherits from the \code{Instance} class and

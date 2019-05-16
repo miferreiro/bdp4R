@@ -3,10 +3,8 @@
 #' implements the functions of extracting the text and the date of an eml-type
 #' file.
 #' @docType class
-#' @usage ExtractorSms$new(path, pathKeys = "config/configurations.ini")
+#' @usage ExtractorSms$new(path)
 #' @param path  (character) Path of the eml-type file.
-#' @param pathKeys  (character) Path of the .ini file that contains the
-#' configurations to read the eml files.
 #' @details The way to indicate which part to choose in the email is through an
 #' .ini file which contains the following structure (being xxxx, text / plain or
 #' text / html):
@@ -101,8 +99,7 @@ ExtractorEml <- R6Class(
 
   public = list(
 
-    initialize = function(path,
-                          pathKeys = "config/configurations.ini") {
+    initialize = function(path) {
 
       if (!"character" %in% class(path)) {
         stop("[ExtractorEml][initialize][Error]
@@ -110,22 +107,10 @@ ExtractorEml <- R6Class(
                   class(path))
       }
 
-      if (!"character" %in% class(pathKeys)) {
-        stop("[ExtractorEml][initialize][Error]
-                Checking the type of the variable: pathKeys ",
-                  class(pathKeys))
-      }
-
-      if (!"ini" %in% file_ext(pathKeys)) {
-        stop("[ExtractorEml][initialize][Error]
-                Checking the extension of the file: pathKeys ",
-                  file_ext(pathKeys))
-      }
-
       path %>>%
         super$initialize()
 
-      read.ini(pathKeys)$eml$PartSelectedOnMPAlternative %>>%
+      read.ini(Bdp4R[["private_fields"]][["configurationFilePath"]])$eml$PartSelectedOnMPAlternative %>>%
         self$setPartSelectedOnMPAlternative()
     },
 

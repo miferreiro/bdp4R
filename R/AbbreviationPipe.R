@@ -5,13 +5,10 @@
 #' @docType class
 #' @usage AbbreviationPipe$new(propertyName = "abbreviation",
 #'                      propertyLanguageName = "language",
-#'                      pathResourcesAbbreviations = "resources/abbreviations-json",
 #'                      alwaysBeforeDeps = list("GuessLanguagePipe"),
 #'                      notAfterDeps = list())
 #' @param propertyName  (character) Name of the property associated with the pipe.
 #' @param propertyLanguageName  (character) Name of the language property.
-#' @param pathResourcesAbbreviations (character) Path where are stored the
-#  abbreviation resources.
 #' @param alwaysBeforeDeps (list) The dependences alwaysBefore (pipes that must
 #' be executed before this one).
 #' @param notAfterDeps (list) The dependences notAfter (pipes that cannot be
@@ -23,6 +20,14 @@
 #' that apply to the data. The format of the file names of the resources has to
 #' be: abbrev.xxx.json (Being xxx the value of the language property of the
 #' instance).
+#'
+#' To indicate the path where the associated resources are located, the
+#' configuration file is used. It is necessary to indicate in the section called
+#' resourcesPath, the path of resourcesAbbreviationsPath:
+#'
+#' [resourcesPath]
+#'
+#' resourcesAbbreviationsPath = YourResourcesAbbreviationsPath
 #'
 #' The pipe will invalidate the instance in the moment that the resulting data is
 #' empty.
@@ -124,12 +129,12 @@
 #' }
 #' }
 #'
-#' \item{\bold{getPathResourcesAbbreviations}}{
+#' \item{\bold{getResourcesAbbreviationsPath}}{
 #' Getter of path of abbreviations resources.
 #' \itemize{
 #' \item{\emph{Usage}}{
 #'
-#' \code{getPathResourcesAbbreviations()}
+#' \code{getResourcesAbbreviationsPath()}
 #' }
 #' \item{\emph{Value}}{
 #'
@@ -144,7 +149,7 @@
 #' \item{\bold{propertyLanguageName}}{
 #'  (character) The name of property about language.
 #' }
-#' \item{\bold{pathResourcesAbbreviations}}{
+#' \item{\bold{resourcesAbbreviationsPath}}{
 #'  (character) The path where are the resources.
 #' }
 #' }
@@ -168,7 +173,6 @@ AbbreviationPipe <- R6Class(
 
     initialize = function(propertyName = "abbreviation",
                           propertyLanguageName = "language",
-                          pathResourcesAbbreviations = "resources/abbreviations-json",
                           alwaysBeforeDeps = list("GuessLanguagePipe"),
                           notAfterDeps = list()) {
 
@@ -182,12 +186,6 @@ AbbreviationPipe <- R6Class(
         stop("[AbbreviationPipe][initialize][Error]
                 Checking the type of the variable: propertyLanguageName ",
                   class(propertyLanguageName))
-      }
-
-      if (!"character" %in% class(pathResourcesAbbreviations)) {
-        stop("[AbbreviationPipe][initialize][Error]
-                Checking the type of the variable: pathResourcesAbbreviations ",
-                  class(pathResourcesAbbreviations))
       }
 
       if (!"list" %in% class(alwaysBeforeDeps)) {
@@ -205,7 +203,9 @@ AbbreviationPipe <- R6Class(
       super$initialize(propertyName, alwaysBeforeDeps, notAfterDeps)
 
       private$propertyLanguageName <- propertyLanguageName
-      private$pathResourcesAbbreviations <- pathResourcesAbbreviations
+
+      private$resourcesAbbreviationsPath <- read.ini(Bdp4R[["private_fields"]][["configurationFilePath"]])$resourcesPath$resourcesAbbreviationsPath
+
     },
 
     pipe = function(instance, replaceAbbreviations = TRUE) {
@@ -232,7 +232,7 @@ AbbreviationPipe <- R6Class(
 
       languageInstance <- "Unknown"
 
-      languageInstance <- instance$getSpecificProperty( self$getPropertyLanguageName())
+      languageInstance <- instance$getSpecificProperty(self$getPropertyLanguageName())
 
       # If the language property is not found, the instance can not be preprocessed
       if (is.null(languageInstance) ||
@@ -247,13 +247,13 @@ AbbreviationPipe <- R6Class(
         return(instance)
       }
 
-      JsonFile <- paste(self$getPathResourcesAbbreviations(),
+      JsonFile <- paste(self$getResourcesAbbreviationsPath(),
                         "/abbrev.",
                         languageInstance,
                         ".json",
                         sep = "")
 
-      jsonData <- Bdp4R[["private_fields"]][["resourceHandle"]]$isLoadResource(JsonFile)
+      jsonData <- Bdp4R[["private_fields"]][["resourceHandler"]]$isLoadResource(JsonFile)
 
       #It is verified that there is a resource associated to the language of the instance
       if (!is.null(jsonData)) {
@@ -371,14 +371,14 @@ AbbreviationPipe <- R6Class(
       return(private$propertyLanguageName)
     },
 
-    getPathResourcesAbbreviations = function() {
+    getResourcesAbbreviationsPath = function() {
 
-      return(private$pathResourcesAbbreviations)
+      return(private$resourcesAbbreviationsPath)
     }
   ),
 
   private = list(
     propertyLanguageName = "",
-    pathResourcesAbbreviations = ""
+    resourcesAbbreviationsPath = ""
   )
 )

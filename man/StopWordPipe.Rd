@@ -8,7 +8,6 @@
 \usage{
 StopWordPipe$new(propertyName = "stopWord",
                  propertyLanguageName = "language",
-                 pathResourcesStopWords = "resources/stopwords-json",
                  alwaysBeforeDeps = list("GuessLanguagePipe"),
                  notAfterDeps = list("AbbreviationPipe"))
 }
@@ -16,9 +15,6 @@ StopWordPipe$new(propertyName = "stopWord",
 \item{propertyName}{(character) Name of the property associated with the pipe.}
 
 \item{propertyLanguageName}{(character) Name of the language property.}
-
-\item{pathResourcesStopWords}{(character) Path where are stored the
-stop words resources.}
 
 \item{alwaysBeforeDeps}{(list) The dependences alwaysBefore (pipes that must
 be executed before this one).}
@@ -38,6 +34,10 @@ a property that indicates the language of the data to be able to correctly
 choose the list of stop words that apply to the data. The format of the file
 names of the resources has to be: xxx.json (Being xxx the value of the
 language property of the instance).
+
+To indicate the path where the associated resources are located, the
+configuration file is used. It is necessary to indicate in the section called
+resourcesPath, the path of resourcesStopWordsPath.
 
 The pipe will invalidate the instance in the moment that the resulting data is
 empty.

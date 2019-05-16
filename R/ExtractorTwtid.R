@@ -9,9 +9,13 @@
 #' class, which needs a configuration file with the necessary keys to make
 #' requests to the twitter API.
 #'
-#' This class stores in the folder testFiles/cache/hsspam14/tweets the
+#' This class stores in the folder indicates in the file configuration the
 #' tweets processed so far, this allowing you to save twitter queries. The text
 #' fields, the date and the language of the tweet are stored.
+#'
+#' The file configuration has to have the section cache with the value of the
+#' cachePathTwtid. This variable has to be the path to store the tweets and it is
+#' neccesary that it has two folder named: "_spam_" and "_ham_"
 #'
 #' @section Inherit:
 #' This class inherits from \code{\link{Instance}} and implements the
@@ -116,10 +120,11 @@ ExtractorTwtid <- R6Class(
 
     obtainDate = function() {
 
+      cachePath <- read.ini(Bdp4R[["private_fields"]][["configurationFilePath"]])$cache$cachePathTwtid
+
       if (file.exists(
-        paste(
-          "testFiles/cache/hsspam14/",
-          "tweets/_",
+        paste(cachePath,
+          "/_",
           super$getSpecificProperty("target"),
           "_/",
           self$getId(),
@@ -130,7 +135,7 @@ ExtractorTwtid <- R6Class(
 
         private$path <-
           paste(
-            "testFiles/cache/hsspam14/tweets/_",
+            cachePath,"/_",
             super$getSpecificProperty("target"),
             "_/",
             self$getId(),
@@ -211,8 +216,8 @@ ExtractorTwtid <- R6Class(
           cat(
             exportJSON,
             file = paste(
-              "testFiles/cache/hsspam14/",
-              "tweets/_",
+              cachePath,
+              "/_",
               super$getSpecificProperty("target"),
               "_/",
               self$getId(),
@@ -236,8 +241,8 @@ ExtractorTwtid <- R6Class(
           cat(
             exportJSON,
             file = paste(
-              "testFiles/cache/hsspam14/",
-              "tweets/_",
+              cachePath,
+              "/_",
               super$getSpecificProperty("target"),
               "_/",
               self$getId(),
@@ -254,10 +259,12 @@ ExtractorTwtid <- R6Class(
 
     obtainSource = function() {
 
+      cachePath <- read.ini(Bdp4R[["private_fields"]][["configurationFilePath"]])$cache$cachePathTwtid
+
       if (file.exists(
         paste(
-          "testFiles/cache/hsspam14/",
-          "tweets/_",
+          cachePath,
+          "/_",
           super$getSpecificProperty("target"),
           "_/",
           self$getId(),
@@ -267,7 +274,8 @@ ExtractorTwtid <- R6Class(
       )) {
         private$path <-
           paste(
-            "testFiles/cache/hsspam14/tweets/_",
+            cachePath,
+            "/_",
             super$getSpecificProperty("target"),
             "_/",
             self$getId(),
@@ -352,8 +360,8 @@ ExtractorTwtid <- R6Class(
           cat(
             exportJSON,
             file = paste(
-              "testFiles/cache/hsspam14/",
-              "tweets/_",
+              cachePath,
+              "/_",
               super$getSpecificProperty("target"),
               "_/",
               self$getId(),
@@ -379,8 +387,8 @@ ExtractorTwtid <- R6Class(
           cat(
             exportJSON,
             file = paste(
-              "testFiles/cache/hsspam14/",
-              "tweets/_",
+              cachePath,
+              "/_",
               super$getSpecificProperty("target"),
               "_/",
               self$getId(),

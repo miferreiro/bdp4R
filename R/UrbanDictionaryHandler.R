@@ -2,7 +2,7 @@
 #' @description Class to get the match with the specific word from an
 #' Urban dictionary.
 #' @docType class
-#' @usage UrbanDictionaryHandler$new(pathResourcesSlangs = "resources/slangs-json")
+#' @usage UrbanDictionaryHandler$new()
 #' @param propertyName  (character) Name of the property.
 #' @param alwaysBeforeDeps (list) The dependences alwaysBefore (pipes that must
 #' be executed before this one).
@@ -62,12 +62,12 @@
 #' }
 #' }
 #'
-#' \item{\bold{getPathResourcesSlangs}}{
+#' \item{\bold{getResourcesUrbanDictionaryPath}}{
 #' Getter of path of slangs resources.
 #' \itemize{
 #' \item{\emph{Usage}}{
 #'
-#' \code{getPathResourcesSlangs()}
+#' \code{getResourcesUrbanDictionaryPath()}
 #' }
 #' \item{\emph{Value}}{
 #'
@@ -80,7 +80,7 @@
 #'
 #' @section Private fields:
 #' \itemize{
-#' \item{\bold{pathResourcesSlangs}}{
+#' \item{\bold{resourcesUrbanDictionaryPath}}{
 #'  (character) The path where are the resources.
 #' }
 #' }
@@ -98,15 +98,10 @@ UrbanDictionaryHandler <- R6Class(
 
   public = list(
 
-    initialize = function(pathResourcesSlangs = "resources/slangs-json") {
+    initialize = function() {
 
-      if (!"character" %in% class(pathResourcesSlangs)) {
-        stop("[UrbanDictionaryHandler][initialize][Error]
-                Checking the type of the variable: pathResourcesSlangs ",
-                  class(pathResourcesSlangs))
-      }
+      private$resourcesUrbanDictionaryPath <- read.ini(Bdp4R[["private_fields"]][["configurationFilePath"]])$resourcesPath$resourcesUrbanDictionaryPath
 
-      private$pathResourcesSlangs <- pathResourcesSlangs
     },
 
     handle = function(originalText, replacementText, lang) {
@@ -149,13 +144,13 @@ UrbanDictionaryHandler <- R6Class(
                   class(lang))
       }
 
-      JsonFile <- paste(self$getPathResourcesSlangs(),
+      JsonFile <- paste(self$getResourcesUrbanDictionaryPath(),
                         "/slang.",
                         base::tolower(lang),
                         ".json",
                         sep = "")
 
-      jsonData <- Bdp4R[["private_fields"]][["resourceHandle"]]$isLoadResource(JsonFile)
+      jsonData <- Bdp4R[["private_fields"]][["resourceHandler"]]$isLoadResource(JsonFile)
 
       if (is.null(jsonData)) {
         message <- c( "Has not an SlangsJsonFile to apply to the language -> ", base::tolower(lang))
@@ -171,13 +166,13 @@ UrbanDictionaryHandler <- R6Class(
       return(jsonData)[[slangTerm]]
     },
 
-    getPathResourcesSlangs = function() {
+    getResourcesUrbanDictionaryPath = function() {
 
-      return(private$pathResourcesSlangs)
+      return(private$resourcesUrbanDictionaryPath)
     }
   ),
 
   private = list(
-    pathResourcesSlangs = ""
+    resourcesUrbanDictionaryPath = ""
   )
 )

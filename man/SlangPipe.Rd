@@ -8,7 +8,6 @@
 \usage{
 SlangPipe$new(propertyName = "langpropname",
               propertyLanguageName = "language",
-              pathResourcesSlangs = "resources/slangs-json",
               alwaysBeforeDeps = list("GuessLanguagePipe"),
               notAfterDeps = list())
 }
@@ -16,9 +15,6 @@ SlangPipe$new(propertyName = "langpropname",
 \item{propertyName}{(character) Name of the property associated with the pipe.}
 
 \item{propertyLanguageName}{(character) Name of the language property.}
-
-\item{pathResourcesSlangs}{(character) Path where are stored the slangs
-resources.}
 
 \item{alwaysBeforeDeps}{(list) The dependences alwaysBefore (pipes that must
 be executed before this one).}
@@ -38,6 +34,10 @@ that the instance contains a property that indicates the language of the data
 to be able to correctly choose the list of slangs that apply to the data.
 The format of the file names of the resources has to be: slang.xxx.json
 (Being xxx the value of the language property of the instance).
+
+To indicate the path where the associated resources are located, the
+configuration file is used. It is necessary to indicate in the section called
+resourcesPath, the path of resourcesSlangsPath.
 
 The pipe will invalidate the instance in the moment that the resulting data is
 empty.
@@ -143,12 +143,12 @@ Value of name of property language.
 }
 }
 
-\item{\bold{getPathResourcesSlangs}}{
+\item{\bold{getResourcesSlangsPath}}{
 Getter of path of slangs resources.
 \itemize{
 \item{\emph{Usage}}{
 
-\code{getPathResourcesSlangs()}
+\code{getResourcesSlangsPath()}
 }
 \item{\emph{Value}}{
 
@@ -165,7 +165,7 @@ Value of path of slangs resources.
 \item{\bold{propertyLanguageName}}{
  (character) The name of property about language.
 }
-\item{\bold{pathResourcesSlangs}}{
+\item{\bold{resourcesSlangsPath}}{
  (character) The path where are the resources.
 }
 }

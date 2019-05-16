@@ -3,13 +3,27 @@
 #' the classes and the function that prepares and launches the execution of the
 #' pipes from the TypePipe object that is passed to it as an argument.
 #' @docType class
-#' @usage Bdp4R$new(pathKeys = "config/configurations.ini")
-#' @param connections  (Connections) Initialize the object that handles the
+#' @usage Bdp4R$new(configurationFilePath)
+#' @param pathKeys (character) Path where the file with configurations are located.
+#'
+#' @section Static variables:
+#' \itemize{
+#' \item{\bold{connections}}{
+#' (Connections) Initialize the object that handles the
 #' different types of connections with youtube and twitter.
-#' @param babelUtils  (BabelUtils) Initialize the object that handles the different
+#' }
+#' \item{\bold{BabelUtils}}{
+#' (BabelUtils) Initialize the object that handles the different
 #' types of connections with babelfy and babelnet.
-#' @param resourceHandle (ResourceHandler) Initialize the object that manages the
+#' }
+#' \item{\bold{ResourceHandler}}{
+#' (ResourceHandler) Initialize the object that manages the
 #' loading of the resource files, such as abbreviation, slang, stopword, etc.
+#' }
+#' \item{\bold{configurationFilePath}}{
+#' (character) Path where the file with keys are located.
+#' }
+#' }
 #'
 #' @section Methods:
 #' \itemize{
@@ -18,8 +32,8 @@
 #' \itemize{
 #' \item{\emph{Usage}}{
 #'
-#' \code{proccess_files(pathFiles,
-#'                      pipe)}
+#' \code{proccess_files(filesPath,pipe)}
+#'
 #' }
 #' \item{\emph{Value}}{
 #'
@@ -27,11 +41,11 @@
 #' }
 #' \item{\emph{Arguments}}{
 #' \itemize{
-#' \item{\strong{pathFiles}}{
+#' \item{\strong{filesPath}}{
 #' (character) Path where the files to be processed are located.
 #' }
 #' \item{\strong{pipe}}{
-#' (TypePipe) Indicate if the abbreviations are replaced.
+#' (TypePipe) Subclass of TypePipe, which implements the pipe method.
 #' }
 #' }
 #' }
@@ -49,29 +63,30 @@ Bdp4R <- R6Class(
 
   public = list(
 
-    initialize = function(pathKeys) {
+    initialize = function(configurationFilePath) {
 
-      if (!"character" %in% class(pathKeys)) {
+      if (!"character" %in% class(configurationFilePath)) {
         stop("[Bdp4R][initialize][Error]
-                Checking the type of the variable: pathKeys ",
-                  class(pathKeys))
+                Checking the type of the variable: configurationFilePath ",
+                  class(pathFileConfiguration))
       }
 
-      if (!"ini" %in% file_ext(pathKeys)) {
+      if (!"ini" %in% file_ext(configurationFilePath)) {
         stop("[Bdp4R][initialize][Error]
-                Checking the extension of the file: pathKeys ",
-                  file_ext(pathKeys))
+                Checking the extension of the file: configurationFilePath ",
+                  file_ext(configurationFilePath))
       }
 
-      Bdp4R[["private_fields"]][["resourceHandle"]] <- ResourceHandler$new()
-      Bdp4R[["private_fields"]][["connections"]] <- Connections$new(pathKeys)
-      Bdp4R[["private_fields"]][["babelUtils"]] <- BabelUtils$new(pathKeys)
+      Bdp4R[["private_fields"]][["configurationFilePath"]] <- configurationFilePath
+      Bdp4R[["private_fields"]][["resourceHandler"]] <- ResourceHandler$new()
+      Bdp4R[["private_fields"]][["connections"]] <- Connections$new(configurationFilePath)
+      Bdp4R[["private_fields"]][["babelUtils"]] <- BabelUtils$new(configurationFilePath)
 
     },
 
-    proccess_files = function(pathFiles, pipe) {
+    proccess_files = function(filesPath, pipe) {
 
-      if (!"character" %in% class(pathFiles)) {
+      if (!"character" %in% class(filesPath)) {
         stop("[Bdp4R][proccess_files][Error]
                 Checking the type of the variable: pathFiles ",
                   class(pathFiles))
@@ -84,10 +99,10 @@ Bdp4R <- R6Class(
       }
 
       #Array of files to preprocess
-      Files <- list.files(path = pathFiles, recursive = TRUE, full.names = TRUE, all.files = TRUE)
+      Files <- list.files(path = filesPath, recursive = TRUE, full.names = TRUE, all.files = TRUE)
       #Create the list of instances, which will contain the date, source, path, data
       #and a list of properties of the file that is in the indicated path
-      InstancesList <- sapply(Files[1], InstanceFactory$new()$createInstance)
+      InstancesList <- sapply(Files, InstanceFactory$new()$createInstance)
       cat("[Bdp4R][proccess_files][Info] ", "Has been created: ", length(InstancesList)," instances.\n")
       listInstances <- sapply(InstancesList, pipe$pipeAll)
 
@@ -102,6 +117,8 @@ Bdp4R <- R6Class(
     babelUtils = NULL,
     #Initialize the object that manages the loading of the resource files, such as
     #abbreviation, slang, stopword, etc.
-    resourceHandle = NULL
+    resourceHandler = NULL,
+    #Path where the file with keys are located.
+    configurationFilePath = NULL
   )
 )

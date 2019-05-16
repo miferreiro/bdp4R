@@ -42,8 +42,7 @@ Function that complete the csv with the preprocessed instance and synsets.
 \item{\emph{Usage}}{
 
 \code{pipe(instance, withData = TRUE, withSource = TRUE,
-listPropertySynsets = c("synsetVector", "synsetFeatureVector"),
-outPutPath = "dataFrameAllSynsets.csv")}
+listPropertySynsets = c("synsetVector", "synsetFeatureVector"))}
 }
 \item{\emph{Value}}{
 
@@ -62,9 +61,6 @@ The instance with the modifications that have occurred in the pipe.
 }
 \item{\strong{listPropertySynsets}}{
 (character) vector indicating properties related to synsets.
-}
-\item{\strong{outPutPath}}{
-(character) name of the csv to store synsets and properties of the instance.
 }
 }
 }

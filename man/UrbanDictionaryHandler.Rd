@@ -6,7 +6,7 @@
 \title{Class to get the match with the specific word from an Urban dictionary}
 \format{An object of class \code{R6ClassGenerator} of length 24.}
 \usage{
-UrbanDictionaryHandler$new(pathResourcesSlangs = "resources/slangs-json")
+UrbanDictionaryHandler$new()
 }
 \arguments{
 \item{propertyName}{(character) Name of the property.}
@@ -75,12 +75,12 @@ The word that matches with the originalText.
 }
 }
 
-\item{\bold{getPathResourcesSlangs}}{
+\item{\bold{getResourcesUrbanDictionaryPath}}{
 Getter of path of slangs resources.
 \itemize{
 \item{\emph{Usage}}{
 
-\code{getPathResourcesSlangs()}
+\code{getResourcesUrbanDictionaryPath()}
 }
 \item{\emph{Value}}{
 
@@ -95,7 +95,7 @@ Value of path of slangs eesources.
 \section{Private fields}{
 
 \itemize{
-\item{\bold{pathResourcesSlangs}}{
+\item{\bold{resourcesUrbanDictionaryPath}}{
  (character) The path where are the resources.
 }
 }

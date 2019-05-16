@@ -5,13 +5,10 @@
 #' @docType class
 #' @usage StopWordPipe$new(propertyName = "stopWord",
 #'                  propertyLanguageName = "language",
-#'                  pathResourcesStopWords = "resources/stopwords-json",
 #'                  alwaysBeforeDeps = list("GuessLanguagePipe"),
 #'                  notAfterDeps = list("AbbreviationPipe"))
 #' @param propertyName  (character) Name of the property associated with the pipe.
 #' @param propertyLanguageName  (character) Name of the language property.
-#' @param pathResourcesStopWords (character) Path where are stored the
-#' stop words resources.
 #' @param alwaysBeforeDeps (list) The dependences alwaysBefore (pipes that must
 #' be executed before this one).
 #' @param notAfterDeps (list) The dependences notAfter (pipes that cannot be
@@ -22,6 +19,14 @@
 #' choose the list of stop words that apply to the data. The format of the file
 #' names of the resources has to be: xxx.json (Being xxx the value of the
 #' language property of the instance).
+#'
+#' To indicate the path where the associated resources are located, the
+#' configuration file is used. It is necessary to indicate in the section called
+#' resourcesPath, the path of resourcesStopWordsPath.
+#'
+#' [resourcesPath]
+#'
+#' resourcesStopWordsPath = YourResourcesStopWordsPath
 #'
 #' The pipe will invalidate the instance in the moment that the resulting data is
 #' empty.
@@ -164,7 +169,6 @@ StopWordPipe <- R6Class(
 
     initialize = function(propertyName = "stopWord",
                           propertyLanguageName = "language",
-                          pathResourcesStopWords = "resources/stopwords-json",
                           alwaysBeforeDeps = list("GuessLanguagePipe"),
                           notAfterDeps = list("AbbreviationPipe")) {
 
@@ -178,12 +182,6 @@ StopWordPipe <- R6Class(
         stop("[StopWordPipe][initialize][Error]
                 Checking the type of the variable: propertyLanguageName ",
                   class(propertyLanguageName))
-      }
-
-      if (!"character" %in% class(pathResourcesStopWords)) {
-        stop("[StopWordPipe][initialize][Error]
-                Checking the type of the variable: pathResourcesStopWords ",
-                  class(pathResourcesStopWords))
       }
 
       if (!"list" %in% class(alwaysBeforeDeps)) {
@@ -200,7 +198,9 @@ StopWordPipe <- R6Class(
       super$initialize(propertyName, alwaysBeforeDeps, notAfterDeps)
 
       private$propertyLanguageName <- propertyLanguageName
-      private$pathResourcesStopWords <- pathResourcesStopWords
+
+      private$resourcesStopWordsPath <- read.ini(Bdp4R[["private_fields"]][["configurationFilePath"]])$resourcesPath$resourcesStopWordsPath
+
     },
 
     pipe = function(instance, removeStopWords = TRUE) {
@@ -248,13 +248,13 @@ StopWordPipe <- R6Class(
         return(instance)
       }
 
-      JsonFile <- paste(self$getPathResourcesStopWords(),
+      JsonFile <- paste(self$getResourcesStopWordsPath(),
                         "/",
                         languageInstance,
                         ".json",
                         sep = "")
 
-      jsonData <- Bdp4R[["private_fields"]][["resourceHandle"]]$isLoadResource(JsonFile)
+      jsonData <- Bdp4R[["private_fields"]][["resourceHandler"]]$isLoadResource(JsonFile)
 
       if (!is.null(jsonData)) {
 
@@ -369,14 +369,14 @@ StopWordPipe <- R6Class(
       return(private$propertyLanguageName)
     },
 
-    getPathResourcesStopWords = function() {
+    getResourcesStopWordsPath = function() {
 
-      return(private$pathResourcesStopWords)
+      return(private$resourcesStopWordsPath)
     }
   ),
 
   private = list(
     propertyLanguageName = "",
-    pathResourcesStopWords = ""
+    resourcesStopWordsPath = ""
   )
 )

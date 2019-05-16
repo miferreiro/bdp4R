@@ -20,7 +20,7 @@
 #' \itemize{
 #' \item{\emph{Usage}}{
 #'
-#' \code{pipe(instance, withData = TRUE, withSource = TRUE, outPutPath = "dataFrameAll.csv")}
+#' \code{pipe(instance, withData = TRUE, withSource = TRUE)}
 #' }
 #' \item{\emph{Value}}{
 #'
@@ -36,9 +36,6 @@
 #' }
 #' \item{\strong{withSource}}{
 #' (logical) Indicate if the source is added to csv.
-#' }
-#' \item{\strong{outPutPath}}{
-#' (logical) Indicate if the source is added to csv
 #' }
 #' }
 #' }
@@ -84,7 +81,9 @@ TeeCSVPipe <- R6Class(
       super$initialize(propertyName, alwaysBeforeDeps, notAfterDeps)
     },
 
-    pipe = function(instance, withData = TRUE, withSource = TRUE, outPutPath = "dataFrameAll.csv") {
+    pipe = function(instance, withData = TRUE, withSource = TRUE) {
+
+      outPutPath <- read.ini(Bdp4R[["private_fields"]][["configurationFilePath"]])$CSVPath$outPutTeeCSVPipePath
 
       if (!"Instance" %in% class(instance)) {
         stop("[TeeCSVPipe][pipe][Error]

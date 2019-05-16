@@ -129,15 +129,16 @@ GuessLanguagePipe <- R6Class(
       if (languageTwitter
             && instance$getSpecificProperty("extension") %in% "twtid") {
 
-        if (file.exists(paste("testFiles/cache/hsspam14/",
-                                "tweets/_",
+        cachePath <- read.ini(Bdp4R[["private_fields"]][["configurationFilePath"]])$cache$pathCacheTwtid
+
+        if (file.exists(paste(cachePath, "/_",
                                   instance$getSpecificProperty("target"),
                                     "_/",
                                       instance$getId(),
                                         ".json",
                                           sep = ""))) {
 
-          path <- paste("testFiles/cache/hsspam14/tweets/_",
+          path <- paste(cachePath,"/_",
                           instance$getSpecificProperty("target"),
                             "_/",
                               instance$getId(),

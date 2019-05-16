@@ -6,23 +6,37 @@
 \title{Class to manage the preprocess of the files through the pipes' flow}
 \format{An object of class \code{R6ClassGenerator} of length 24.}
 \usage{
-Bdp4R$new(pathKeys = "config/configurations.ini")
+Bdp4R$new(configurationFilePath)
 }
 \arguments{
-\item{connections}{(Connections) Initialize the object that handles the
-different types of connections with youtube and twitter.}
-
-\item{babelUtils}{(BabelUtils) Initialize the object that handles the different
-types of connections with babelfy and babelnet.}
-
-\item{resourceHandle}{(ResourceHandler) Initialize the object that manages the
-loading of the resource files, such as abbreviation, slang, stopword, etc.}
+\item{pathKeys}{(character) Path where the file with keys are located.}
 }
 \description{
 It contains the "static" variables that will be used throughout
 the classes and the function that prepares and launches the execution of the
 pipes from the TypePipe object that is passed to it as an argument.
 }
+\section{Static variables}{
+
+\itemize{
+\item{\bold{connections}}{
+(Connections) Initialize the object that handles the
+different types of connections with youtube and twitter.
+}
+\item{\bold{BabelUtils}}{
+(BabelUtils) Initialize the object that handles the different
+types of connections with babelfy and babelnet.
+}
+\item{\bold{ResourceHandler}}{
+(ResourceHandler) Initialize the object that manages the
+loading of the resource files, such as abbreviation, slang, stopword, etc.
+}
+\item{\bold{configurationFilePath}}{
+(character) Path where the file with keys are located.
+}
+}
+}
+
 \section{Methods}{
 
 \itemize{
@@ -31,7 +45,7 @@ Preprocess files through a pipes' flow
 \itemize{
 \item{\emph{Usage}}{
 
-\code{proccess_files(pathFiles,
+\code{proccess_files(filesPath,
                      pipe)}
 }
 \item{\emph{Value}}{
@@ -40,11 +54,11 @@ List of instances that have been preprocessed.
 }
 \item{\emph{Arguments}}{
 \itemize{
-\item{\strong{pathFiles}}{
+\item{\strong{filesPath}}{
 (character) Path where the files to be processed are located.
 }
 \item{\strong{pipe}}{
-(TypePipe) Indicate if the abbreviations are replaced.
+(TypePipe) Subclass of TypePipe, which implements the pipe method.
 }
 }
 }

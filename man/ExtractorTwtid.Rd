@@ -21,9 +21,13 @@ The connection to twitter is handled through the \code{Connections}
 class, which needs a configuration file with the necessary keys to make
 requests to the twitter API.
 
-This class stores in the folder testFiles/cache/hsspam14/tweets the
+This class stores in the folder indicates in the file configuration the
 tweets processed so far, this allowing you to save twitter queries. The text
 fields, the date and the language of the tweet are stored.
+
+The file configuration has to have the section cache with the value of the
+cachePathTwtid. This variable has to be the path to store the tweets and it is
+neccesary that it has two folder named: "_spam_" and "_ham_"
 }
 \section{Inherit}{
 

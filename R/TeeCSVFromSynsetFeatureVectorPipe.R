@@ -24,8 +24,7 @@
 #' \item{\emph{Usage}}{
 #'
 #' \code{pipe(instance, withData = TRUE, withSource = TRUE,
-#' listPropertySynsets = c("synsetVector", "synsetFeatureVector"),
-#' outPutPath = "dataFrameAllSynsets.csv")}
+#' listPropertySynsets = c("synsetVector", "synsetFeatureVector"))}
 #' }
 #' \item{\emph{Value}}{
 #'
@@ -44,9 +43,6 @@
 #' }
 #' \item{\strong{listPropertySynsets}}{
 #' (character) vector indicating properties related to synsets.
-#' }
-#' \item{\strong{outPutPath}}{
-#' (character) name of the csv to store synsets and properties of the instance.
 #' }
 #' }
 #' }
@@ -92,8 +88,9 @@ TeeCSVFromSynsetFeatureVectorPipe <- R6Class(
     },
 
     pipe = function(instance, withData = TRUE, withSource = TRUE,
-                    listPropertySynsets = c("synsetVector", "synsetFeatureVector"),
-                    outPutPath = "dataFrameAllSynsets.csv") {
+                    listPropertySynsets = c("synsetVector", "synsetFeatureVector")) {
+
+      outPutPath <- read.ini(Bdp4R[["private_fields"]][["configurationFilePath"]])$CSVPath$outPutTeeCSVFromSynsetFeatureVectorPipePath
 
       if (!"Instance" %in% class(instance)) {
         stop("[TeeCSVFromSynsetFeatureVectorPipe][pipe][Error]
@@ -127,8 +124,8 @@ TeeCSVFromSynsetFeatureVectorPipe <- R6Class(
 
       if (!"csv" %in% file_ext(outPutPath)) {
         stop("[TeeCSVFromSynsetFeatureVectorPipe][pipe][Error]
-             Checking the extension of the file: outPutPath ",
-             file_ext(outPutPath))
+                Checking the extension of the file: outPutPath ",
+                  file_ext(outPutPath))
       }
 
       instance$addFlowPipes("TeeCSVFromSynsetFeatureVectorPipe")
