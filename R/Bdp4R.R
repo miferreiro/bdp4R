@@ -5,6 +5,41 @@
 #' @docType class
 #' @usage Bdp4R$new(configurationFilePath)
 #' @param pathKeys (character) Path where the file with configurations are located.
+#' @details The configurationFilePath file has to have the following structure:
+#'
+#'
+#' [twitter]
+#' ConsumerKey= YourConsumerKey
+#' ConsumerSecret= YourConsumerSecret
+#' AccessToken= YourAccessToken
+#' AccessTokenSecret= YourAccessTokenSecret
+#'
+#' [youtube]
+#' app_id= YourAppId
+#' app_password= YourAppPassword
+#'
+#' [eml]
+#' PartSelectedOnMPAlternative = yourPartSelectedOnMPAlternative(text/html or text/plain)
+#'
+#' [babelfy]
+#' keyBabelfy = YourKeyBabelfy
+#'
+#' [resourcesPath]
+#' resourcesAbbreviationsPath = YourResourcesAbbreviationsPath
+#' resourcesContractionsPath = YourResourcesContractionsPath
+#' resourcesInterjectionsPath = YourResourcesInterjectionsPath
+#' resourcesSlangsPath = YourResourcesSlangsPath
+#' resourcesStopWordsPath = YourResourcesStopWordsPath
+#' resourcesUrbanDictionaryPath = YourResourcesUrbanDictionaryPath
+#'
+#' [CSVPath]
+#' outPutTeeCSVPipePath = YourOutPutTeeCSVPipePath
+#' outPutTeeCSVFromSynsetFeatureVectorPipePath = YourOutPutTeeCSVFromSynsetFeatureVectorPipePath
+#'
+#' [cache]
+#' cachePathTwtid = YourCachePathTwtid
+#' cachePathYtbid = YourCachePathYtbid
+#'
 #'
 #' @section Static variables:
 #' \itemize{

@@ -9,9 +9,12 @@
 #' be executed before this one).
 #' @param notAfterDeps (list) The dependences notAfter (pipes that cannot be
 #' executed after this one).
-#' @details It is necessary to identify the properties associated with the
-#' synsets that the instance will have, so as not to include them in the
-#' data.frame.
+#' @details The path to save the properties have to indicate in the file of configuration
+#'          The way to indicate is the following:
+#'
+#'          [CSVPath]
+#'
+#'          outPutTeeCSVFromSynsetFeatureVectorPipePath = youOutPutTeeCSVFromSynsetFeatureVectorPipePath
 #'
 #' @section Inherit:
 #' This class inherit from \code{\link{PipeGeneric}} and implements the

@@ -5,7 +5,6 @@
 #' @docType class
 #' @usage Instance$new(path)
 #' @param path  (character) Path of the file.
-#' @details Building...
 #' @section Methods:
 #' \itemize{
 #' \item{\bold{obtainDate}}{

@@ -11,7 +11,6 @@
 #' be executed before this one).
 #' @param notAfterDeps (list) The dependences notAfter (pipes that cannot be
 #' executed after this one).
-#' @details Building...
 #'
 #' @section Inherit:
 #' This class inherits from \code{\link{PipeGeneric}} and implements the

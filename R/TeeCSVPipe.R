@@ -1,5 +1,5 @@
 #' @title Class to complete the csv with the preprocessed instance
-#' @description Complete the csv with the preprocessed instance.
+#' @description Complete the csv with the properties of the preprocessed instance.
 #' @docType class
 #' @usage TeeCSVPipe$new(propertyName = "",
 #'                alwaysBeforeDeps = list(),
@@ -9,7 +9,13 @@
 #' be executed before this one).
 #' @param notAfterDeps (list) The dependences notAfter (pipes that cannot be
 #' executed after this one).
-#' @details Building...
+#' @details The path to save the properties have to indicate in the file of configuration
+#'          The way to indicate is the following:
+#'
+#'          [CSVPath]
+#'
+#'          outPutTeeCSVPipePath = youOutPutTeeCSVPipePath
+#'
 #' @section Inherit:
 #' This class inherits from \code{\link{PipeGeneric}} and implements the
 #' \code{pipe} abstract function.

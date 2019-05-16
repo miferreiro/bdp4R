@@ -8,6 +8,23 @@
 #' be executed before this one).
 #' @param notAfterDeps (list) The dependences notAfter (pipes that cannot be
 #' executed after this one).
+#' @details This class needs files in json format that will contain the slangs
+#' to be located and the string that will replace them. For this it is necessary
+#' that the instance contains a property that indicates the language of the data
+#' to be able to correctly choose the list of slangs that apply to the data.
+#' The format of the file names of the resources has to be: slang.xxx.json
+#' (Being xxx the value of the language property of the instance).
+#'
+#' To indicate the path where the associated resources are located, the
+#' configuration file is used. It is necessary to indicate in the section called
+#' resourcesPath, the path of resourcesUrbanDictionaryPath:
+#'
+#' [resourcesPath]
+#'
+#' resourcesUrbanDictionaryPath = YourResourcesrbanDictionaryPath
+#'
+#' The pipe will invalidate the instance in the moment that the resulting data is
+#' empty.
 #'
 #' @section Methods:
 #' \itemize{
