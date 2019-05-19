@@ -67,7 +67,7 @@
 #' \itemize{
 #' \item{\emph{Usage}}{
 #'
-#' \code{proccess_files(filesPath,pipe)}
+#' \code{proccess_files(pipe = SerialPipes$new(), instanceFactory = InstanceFactory$new())}
 #'
 #' }
 #' \item{\emph{Value}}{
@@ -81,6 +81,10 @@
 #' }
 #' \item{\strong{pipe}}{
 #' (TypePipe) Subclass of TypePipe, which implements the pipe method.
+#' }
+#' \item{\strong{instanceFactory}}{
+#' (InstanceFactory) Class which implements the method "createInstance"
+#' to choose which type of Instance is created.
 #' }
 #' }
 #' }
@@ -119,12 +123,12 @@ Bdp4R <- R6Class(
 
     },
 
-    proccess_files = function(filesPath, pipe) {
+    proccess_files = function(filesPath, pipe = SerialPipes$new(), instanceFactory = InstanceFactory$new()) {
 
       if (!"character" %in% class(filesPath)) {
         stop("[Bdp4R][proccess_files][Error]
-                Checking the type of the variable: pathFiles ",
-                  class(pathFiles))
+                Checking the type of the variable: filesPath ",
+                  class(filesPath))
       }
 
       if (!"TypePipe" %in% class(pipe)) {
@@ -133,11 +137,17 @@ Bdp4R <- R6Class(
                   class(pipe))
       }
 
+      if (!"InstanceFactory" %in% class(instanceFactory)) {
+        stop("[Bdp4R][proccess_files][Error]
+                Checking the type of the variable: instanceFactory ",
+                  class(instanceFactory))
+      }
+
       #Array of files to preprocess
       Files <- list.files(path = filesPath, recursive = TRUE, full.names = TRUE, all.files = TRUE)
       #Create the list of instances, which will contain the date, source, path, data
       #and a list of properties of the file that is in the indicated path
-      InstancesList <- sapply(Files, InstanceFactory$new()$createInstance)
+      InstancesList <- sapply(Files, instanceFactory$createInstance)
       cat("[Bdp4R][proccess_files][Info] ", "Has been created: ", length(InstancesList)," instances.\n")
       listInstances <- sapply(InstancesList, pipe$pipeAll)
 
